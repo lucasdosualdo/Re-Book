@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import cors from "cors";
 import axios from "axios";
 import dotenv from "dotenv";
@@ -10,11 +10,11 @@ app.use(express.json()).use(cors());
 
 const GOOGLE_API_KEY = process.env.API_KEY;
 
-app.get("/status", (req, res) => {
+app.get("/status", (req: Request, res: Response) => {
   res.send("ok");
 });
 
-app.get("/googlebook", async (req, res) => {
+app.get("/googlebook", async (req: Request, res: Response) => {
   try {
     const promise = await axios.get(
       // `https://www.googleapis.com/books/v1/volumes?q=inauthor:machado+de+assis+AND+intitle:dom+casmurro&printType=books&orderBy=newest&key=${API_KEY}`

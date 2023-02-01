@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "esModuleInterop": true,
+    "module": "CommonJS",
+    "moduleResolution": "node" // para o joi -- uma das duas alternativas (tópico 11 - minicurso typescript)
+  },
+  "ts-node": {
+    "esm": true
+  }
+}
