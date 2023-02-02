@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model bookStatus {
+  id             Int              @id @default(autoincrement())
+  status         String
+  createdAt      DateTime         @default(now()) @db.Timestamp(6)
+  updatedAt      DateTime         @default(now()) @db.Timestamp(6)
+  booksLibraries booksLibraries[]
+}
+
+model books {
+  id             String           @id
+  title          String
+  author         String?
+  gender         String?
+  description    String?
+  cover          String?
+  rating         Int
+  createdAt      DateTime         @default(now()) @db.Timestamp(6)
+  updatedAt      DateTime         @default(now()) @db.Timestamp(6)
+  booksLibraries booksLibraries[]
+}
+
+model booksLibraries {
+  id             Int        @id @default(autoincrement())
+  libraryId      Int
+  bookId         String
+  bookStatusId   Int
+  personalRating Int
+  createdAt      DateTime   @default(now()) @db.Timestamp(6)
+  updatedAt      DateTime   @default(now()) @db.Timestamp(6)
+  books          books      @relation(fields: [bookId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  bookStatus     bookStatus @relation(fields: [bookStatusId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model comments {
+  id        Int      @id @default(autoincrement())
+  comment   String
+  userId    Int
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @db.Timestamp(6)
+  users     users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model libraries {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @db.Timestamp(6)
+  users     users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model profile {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  picture   String?
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @db.Timestamp(6)
+  users     users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model sessions {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  token     String   @unique
+  valid     Boolean  @default(true)
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @default(now()) @db.Timestamp(6)
+  users     users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model users {
+  id        Int         @id @default(autoincrement())
+  name      String      @db.VarChar(25)
+  email     String      @unique @db.VarChar(50)
+  password  String      @unique @db.VarChar(30)
+  createdAt DateTime    @default(now()) @db.Timestamp(6)
+  updatedAt DateTime    @default(now()) @db.Timestamp(6)
+  comments  comments[]
+  libraries libraries[]
+  profile   profile[]
+  sessions  sessions[]
+}
