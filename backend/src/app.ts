@@ -3,15 +3,15 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 dotenv.config();
-
-const app = express();
-app.use(express.json()).use(cors());
-
 const GOOGLE_API_KEY = process.env.API_KEY;
 
-app.get("/status", (req: Request, res: Response) => {
-  res.send("ok");
-});
+const app = express();
+app
+  .use(express.json())
+  .use(cors())
+  .get("/status", (req: Request, res: Response) => {
+    res.send("ok");
+  });
 
 // app.get("/googlebook", async (req: Request, res: Response) => {
 //   try {
