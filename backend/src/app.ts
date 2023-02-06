@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { authenticationRouter } from "./routers";
+import { handleApplicationErrors } from "./middlewares/error-handling-middleware";
 
 dotenv.config();
 const GOOGLE_API_KEY = process.env.API_KEY;
@@ -13,7 +14,8 @@ app
   .get("/status", (req: Request, res: Response) => {
     res.send("ok");
   })
-  .use("/auth", authenticationRouter);
+  .use("/auth", authenticationRouter)
+  .use(handleApplicationErrors);
 
 // app.get("/googlebook", async (req: Request, res: Response) => {
 //   try {
