@@ -1,17 +1,19 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import { authenticationRouter } from "./routers";
 
 dotenv.config();
-
-const app = express();
-app.use(express.json()).use(cors());
-
 const GOOGLE_API_KEY = process.env.API_KEY;
 
-app.get("/status", (req: Request, res: Response) => {
-  res.send("ok");
-});
+const app = express();
+app
+  .use(express.json())
+  .use(cors())
+  .get("/status", (req: Request, res: Response) => {
+    res.send("ok");
+  })
+  .use("/auth", authenticationRouter);
 
 // app.get("/googlebook", async (req: Request, res: Response) => {
 //   try {
@@ -27,3 +29,5 @@ app.get("/status", (req: Request, res: Response) => {
 app.listen(process.env.PORT, () => {
   console.log("listening on port " + process.env.PORT);
 });
+
+export default app;
