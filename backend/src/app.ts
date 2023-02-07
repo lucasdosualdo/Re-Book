@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { authenticationRouter } from "./routers";
+import { authenticationRouter, usersRouter } from "./routers";
 import { handleApplicationErrors } from "./middlewares/error-handling-middleware";
 
 dotenv.config();
@@ -14,6 +14,7 @@ app
   .get("/status", (req: Request, res: Response) => {
     res.send("ok");
   })
+  .use("/users", usersRouter)
   .use("/auth", authenticationRouter)
   .use(handleApplicationErrors);
 
