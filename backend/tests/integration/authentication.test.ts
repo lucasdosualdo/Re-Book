@@ -3,7 +3,7 @@ import supertest from "supertest";
 import httpStatus from "http-status";
 import { faker } from "@faker-js/faker";
 import { cleanDb, generateValidToken } from "./helpers";
-import { generateValidBody, createUser } from "../factories/users-factory";
+import { generateValidSignInBody, createUser } from "../factories/users-factory";
 
 beforeAll(async () => {
   await cleanDb();
@@ -28,7 +28,7 @@ describe("POST /auth/sign-in", () => {
 
   describe("when body is valid", () => {
     it("should respond with status 401 if there is no user for given email", async () => {
-      const body = generateValidBody();
+      const body = generateValidSignInBody();
 
       const response = await server.post("/auth/sign-in").send(body);
 
@@ -36,7 +36,7 @@ describe("POST /auth/sign-in", () => {
     });
 
     it("should respond with status 401 if there is a user for given email but password is not correct", async () => {
-      const body = generateValidBody();
+      const body = generateValidSignInBody();
 
       await createUser(body);
 
@@ -50,7 +50,7 @@ describe("POST /auth/sign-in", () => {
 
     describe("when credentials are valid", () => {
       it("should respond with status 200", async () => {
-        const body = generateValidBody();
+        const body = generateValidSignInBody();
         await createUser(body);
 
         const response = await server.post("/auth/sign-in").send(body);
@@ -59,7 +59,7 @@ describe("POST /auth/sign-in", () => {
       });
 
       it("should respond with user data", async () => {
-        const body = generateValidBody();
+        const body = generateValidSignInBody();
         const user = await createUser(body);
 
         const response = await server.post("/auth/sign-in").send(body);
@@ -75,7 +75,7 @@ describe("POST /auth/sign-in", () => {
       });
 
       it("should respond with session token", async () => {
-        const body = generateValidBody();
+        const body = generateValidSignInBody();
         await createUser(body);
         const response = await server.post("/auth/sign-in").send(body);
 
