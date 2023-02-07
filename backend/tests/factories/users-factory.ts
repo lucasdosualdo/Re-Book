@@ -3,10 +3,20 @@ import prisma from "../../src/config/database";
 import { users } from "@prisma/client";
 import bcrypt from "bcrypt";
 
-export function generateValidBody() {
+export function generateValidSignInBody() {
   return {
     email: faker.internet.email(),
     password: faker.internet.password(10),
+  };
+}
+
+export function generateValidSignUpBody() {
+  const password = faker.internet.password(10);
+  return {
+    name: faker.lorem.word(10),
+    email: faker.internet.email(),
+    password,
+    repeatPassword: password,
   };
 }
 
