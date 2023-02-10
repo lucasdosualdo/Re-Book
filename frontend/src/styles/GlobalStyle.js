@@ -102,6 +102,7 @@ a {
     flex-direction: column;
     transform: translateX(100%);
     transition: 0.5s ease-in;
+    z-index: 2;
   }
 
 
