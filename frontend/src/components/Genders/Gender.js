@@ -22,6 +22,7 @@ const GenderBox = styled.div`
   align-items: center;
   color: white;
   position: relative;
+  cursor: pointer;
   :hover {
     width: 18%;
     font-size: 36px;

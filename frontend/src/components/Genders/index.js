@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import Gender from "./Gender";
-import fantasy from "../../../assets/images/fantasy.jpg";
-import fiction from "../../../assets/images/fiction.jpg";
-import history from "../../../assets/images/history.jpg";
-import horror from "../../../assets/images/horror.jpg";
-import humor from "../../../assets/images/humor.jpg";
-import romance from "../../../assets/images/romance.png";
-import science from "../../../assets/images/science.jpg";
+import fantasy from "../../assets/images/fantasy.jpg";
+import fiction from "../../assets/images/fiction.jpg";
+import history from "../../assets/images/history.jpg";
+import horror from "../../assets/images/horror.jpg";
+import humor from "../../assets/images/humor.jpg";
+import romance from "../../assets/images/romance.png";
+import science from "../../assets/images/science.jpg";
 
 export default function Genders() {
   const GENDER_TYPE = Object.freeze({
@@ -58,5 +58,5 @@ const GenderContainer = styled.div`
   height: 300px;
   display: flex;
   align-items: center;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 `;

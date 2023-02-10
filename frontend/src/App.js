@@ -1,6 +1,6 @@
 import GlobalStyle from "./styles/GlobalStyle";
-import Header from "./layouts/Header";
-import Main from "./pages/Home";
+import Header from "./common/Header";
+import Main from "./screens/Home";
 
 export default function App() {
   return (
