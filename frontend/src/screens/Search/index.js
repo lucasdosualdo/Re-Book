@@ -4,7 +4,7 @@ import { IoHeartOutline, IoHeart, IoStarSharp, IoStar } from "react-icons/io5";
 import { IconContext } from "react-icons/lib";
 import axios from "axios";
 
-export default function Book() {
+export default function Search() {
     const [liked, setLiked] = useState(false);
     const [photo, setPhoto] = useState(null);
     const [description, setDescription] = useState(null);
