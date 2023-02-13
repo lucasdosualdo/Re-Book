@@ -31,7 +31,6 @@ const GenderBox = styled.div`
   transition: all 0.5s ease;
   h3 {
     position: absolute;
-
     z-index: 1;
   }
   img {

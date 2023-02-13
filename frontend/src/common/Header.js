@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
+import { IoSearch, IoClose } from "react-icons/io5";
+import { IconContext } from "react-icons/lib";
+import SearchBar from "../components/SearchBar";
+import { CSSTransition } from "react-transition-group";
 
 export default function Header() {
   const [active, setActive] = useState("nav-menu");
   const [icon, setIcon] = useState("nav-toggler");
+  const [disabled, setDisabled] = useState(true);
   const navToggle = () => {
     if (active === "nav-menu") {
       setActive("nav-menu nav-active");
@@ -13,6 +18,21 @@ export default function Header() {
       setIcon("nav-toggler toggle");
     } else setIcon("nav-toggler");
   };
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        event.target.closest(SearchContainer) === null &&
+        !event.target.closest(".search-icon")
+      ) {
+        setDisabled(true);
+      }
+    }
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
   return (
     <nav className="nav">
       <a href="#" className="nav-brand">
@@ -45,6 +65,26 @@ export default function Header() {
           </a>
         </li>
       </ul>
+      <SearchContainer>
+        <CSSTransition
+          in={!disabled}
+          timeout={400}
+          classNames="fade"
+          unmountOnExit
+        >
+          <SearchBar />
+        </CSSTransition>
+        <IconContext.Provider
+          value={{ color: "#cccccc", className: "search-icon" }}
+        >
+          {disabled ? (
+            <IoSearch onClick={() => setDisabled(!disabled)} />
+          ) : (
+            <IoClose onClick={() => setDisabled(!disabled)} />
+          )}
+        </IconContext.Provider>
+      </SearchContainer>
+
       <div onClick={navToggle} className={icon}>
         <div className="line1"></div>
         <div className="line2"></div>
@@ -53,3 +93,11 @@ export default function Header() {
     </nav>
   );
 }
+
+const SearchContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 20vw;
+`;
