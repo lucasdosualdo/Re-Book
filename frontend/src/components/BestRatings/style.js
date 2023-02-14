@@ -14,7 +14,6 @@ export const OverflowMaker = styled.div`
 export const Container = styled.div`
   width: ${(props) => props.size}px;
   margin-left: ${(props) => props.pass}px;
-
   display: flex;
   align-items: center;
   padding: 20px 10px;
@@ -61,7 +60,7 @@ export const BookBox = styled.div`
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   position: relative;
-  transition: all 0.4s ease;
+  transition: all 0.3s ease;
   :hover {
     transform: scale(1.05);
   }

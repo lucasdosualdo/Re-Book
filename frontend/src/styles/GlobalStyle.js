@@ -82,7 +82,9 @@ a {
   background: rgb(0, 33, 65);
   padding: 0 20px;
   position: relative;
-
+  position: fixed;
+  width: 100%;
+  z-index: 1;
 }
 .nav-brand {
   text-transform: uppercase;
