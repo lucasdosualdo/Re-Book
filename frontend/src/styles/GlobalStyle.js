@@ -65,6 +65,7 @@ body {
   font-size: 1.6rem;
   font-family: 'Lato', sans-serif;
   background-color: #021323;
+  padding-top: 8vh;
 }
 li {
   list-style: none;
@@ -81,8 +82,10 @@ a {
   height: 8vh;
   background: rgb(0, 33, 65);
   padding: 0 20px;
-  position: relative;
   position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   width: 100%;
   z-index: 1;
 }

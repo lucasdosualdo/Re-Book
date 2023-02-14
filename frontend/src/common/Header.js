@@ -26,13 +26,17 @@ export default function Header() {
         !event.target.closest(".search-icon")
       ) {
         setDisabled(true);
+
       }
     }
     document.addEventListener("click", handleClickOutside);
+
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
+ 
   return (
     <nav className="nav">
       <a href="#" className="nav-brand">
@@ -65,7 +69,7 @@ export default function Header() {
           </a>
         </li>
       </ul>
-      <SearchContainer>
+      <SearchContainer >
         <CSSTransition
           in={!disabled}
           timeout={400}
@@ -74,13 +78,18 @@ export default function Header() {
         >
           <SearchBar />
         </CSSTransition>
+
         <IconContext.Provider
           value={{ color: "#cccccc", className: "search-icon" }}
         >
           {disabled ? (
-            <IoSearch onClick={() => setDisabled(!disabled)} />
+        
+              <IoSearch onClick={() => setDisabled(!disabled)} />
+   
           ) : (
-            <IoClose onClick={() => setDisabled(!disabled)} />
+           
+              <IoClose onClick={() => setDisabled(!disabled)} />
+           
           )}
         </IconContext.Provider>
       </SearchContainer>
