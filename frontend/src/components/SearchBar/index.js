@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 export default function SearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
-
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       console.log(searchTerm);

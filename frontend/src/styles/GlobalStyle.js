@@ -64,7 +64,7 @@ html {
 body {
   font-size: 1.6rem;
   font-family: 'Lato', sans-serif;
-
+  background-color: #021323;
 }
 li {
   list-style: none;
@@ -82,6 +82,7 @@ a {
   background: rgb(0, 33, 65);
   padding: 0 20px;
   position: relative;
+
 }
 .nav-brand {
   text-transform: uppercase;
