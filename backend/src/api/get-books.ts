@@ -1,11 +1,18 @@
 import axios from "axios";
-import httpStatus from "http-status";
 
 const API_KEY = process.env.GOOGLE_API_KEY;
-const BASE_URL = "https://www.googleapis.com/books/v1/volumes?q=";
+const GOOGLE_URL = "https://www.googleapis.com/books/v1/volumes?q=";
 
-export async function getBooks(searchTerm: string) {
+ export async function getBooks(searchTerm: string) {
+   return axios.get(
+     `${GOOGLE_URL}intitle:${searchTerm}&langRestrict=pt-BR&key=${API_KEY}`
+   );
+ }
+
+
+
+export async function getCover() {
   return axios.get(
-    `${BASE_URL}intitle:${searchTerm}&langRestrict=pt-BR&maxResults=40&key=${API_KEY}`
+    "https://covers.openlibrary.org/b/isbn/978832312321532519474-L.jpg?default=false"
   );
 }

@@ -3,6 +3,6 @@ import { getSearch } from "../controllers/search-books-controller";
 
 const searchBooksRouter = Router();
 
-searchBooksRouter.post("/", getSearch);
+searchBooksRouter.get("/", getSearch);
 
 export { searchBooksRouter };
