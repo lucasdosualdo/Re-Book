@@ -1,7 +1,11 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { authenticationRouter, usersRouter } from "./routers";
+import {
+  authenticationRouter,
+  usersRouter,
+  searchBooksRouter,
+} from "./routers";
 import { handleApplicationErrors } from "./middlewares/error-handling-middleware";
 
 dotenv.config();
@@ -16,6 +20,7 @@ app
   })
   .use("/users", usersRouter)
   .use("/auth", authenticationRouter)
+  .use("/search", searchBooksRouter)
   .use(handleApplicationErrors);
 
 // app.get("/googlebook", async (req: Request, res: Response) => {
