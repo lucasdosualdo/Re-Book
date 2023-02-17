@@ -6,43 +6,60 @@ export async function searchBooks(searchTerm: string) {
   const prunedTerm = trimSearchTerm(searchTerm);
 
   try {
-    const response = await getBooks(searchTerm);
+    const response = await getBooks(prunedTerm);
 
-    if (!response.data.totalItems) throw notFoundError();
-    const books = response.data;
-    const formatBooks = await formatBody(books);
-
+    //if (!response.data.totalItems) throw notFoundError();
+    //const books = response.data;
+    return response.data
+    const formatBooks = await formatBody(response.data);
+    
     return formatBooks;
   } catch (error) {
+    console.log(error.message);
     throw badRequestError();
-  }
-
-  try {
-    const cover = await getCover();
-  } catch (error) {
-    throw notFoundError();
   }
 }
 
-function formatBody(books) {
-  const booksBody = books.items.map((book) => {
-    if (book.volumeInfo.description) {
-      return {
-        id: book.id,
-        title: book.volumeInfo.title,
-        authors: book.volumeInfo.authors,
-        description: book.volumeInfo.description
-          ? book.volumeInfo.description
-          : null,
-        cover: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks : null,
-        isbn: book.volumeInfo.industryIdentifiers.map(
-          (value) => value.identifier
-        ),
-      };
-    }
+async function formatBody(books) {
+  const booksWithDescription = books.items.filter(
+    (book) => book.volumeInfo.description
+  );
+  const booksBody = booksWithDescription.map((book) => {
+    return {
+      id: book.id,
+      title: book.volumeInfo.title,
+      authors: book.volumeInfo.authors,
+      description: book.volumeInfo.description
+        ? book.volumeInfo.description
+        : null,
+      cover: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks : null,
+      isbn: book.volumeInfo.industryIdentifiers.map(
+        (value) => value.identifier
+      ),
+    };
   });
 
-  return booksBody;
+  const newBooks = await Promise.all(booksBody.map(replaceCover));
+
+  return newBooks;
+}
+
+async function replaceCover(book) {
+  const isbn = book.isbn[0];
+  let cover = `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg?default=false`;
+  try {
+    await getCover(cover);
+
+    book.cover = cover;
+  } catch (error) {
+    const isbn = book.isbn[1];
+    let cover = `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg?default=false`;
+    try {
+      await getCover(cover);
+      book.cover = cover;
+    } catch (error) {}
+  }
+  return book;
 }
 
 function trimSearchTerm(searchTerm: string) {
