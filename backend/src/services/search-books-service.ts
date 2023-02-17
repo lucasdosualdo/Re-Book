@@ -8,11 +8,10 @@ export async function searchBooks(searchTerm: string) {
   try {
     const response = await getBooks(prunedTerm);
 
-    //if (!response.data.totalItems) throw notFoundError();
-    //const books = response.data;
-    return response.data
+    if (!response.data.totalItems) throw notFoundError();
+
     const formatBooks = await formatBody(response.data);
-    
+
     return formatBooks;
   } catch (error) {
     console.log(error.message);
@@ -36,15 +35,32 @@ async function formatBody(books) {
       isbn: book.volumeInfo.industryIdentifiers.map(
         (value) => value.identifier
       ),
+      pages: book.volumeInfo.pageCount ? book.volumeInfo.pageCount : null,
+      language: book.volumeInfo.language ? book.volumeInfo.language : null,
     };
   });
 
-  const newBooks = await Promise.all(booksBody.map(replaceCover));
+  const newBooks: Promise<FormatBookParams>[] = await Promise.all(
+    booksBody.map(replaceCover)
+  );
 
   return newBooks;
 }
 
-async function replaceCover(book) {
+type FormatBookParams = {
+  id: string;
+  title: string;
+  authors: string[];
+  description: string;
+  cover: string | Record<string, string> | null;
+  isbn: string[];
+  pages: number | null;
+  language: string | null;
+};
+
+async function replaceCover(
+  book
+): Promise<string | Record<string, string> | null> {
   const isbn = book.isbn[0];
   let cover = `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg?default=false`;
   try {
