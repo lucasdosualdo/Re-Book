@@ -25,7 +25,6 @@ export default function BookStatus() {
           onClick={() => handleOptionClick(index)}
           selected={selectedId === index}
         >
-         
           {option}
         </Option>
       ))}

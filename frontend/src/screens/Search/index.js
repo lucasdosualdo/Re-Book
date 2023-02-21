@@ -2,11 +2,19 @@ import { useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import { IconContext } from "react-icons/lib";
 import { Background, Container, BookBox } from "./style";
+import { useQuery } from "react-query";
+import { getBooks } from "../../services/searchBooksApi";
 
 export default function Search() {
   const [liked, setLiked] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-
+  const teste = "harry potter";
+  const { data, isLoading, error } = useQuery(
+    ["search-books", teste],
+    async () => {
+      return await getBooks(teste);
+    }
+  );
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       console.log(searchTerm);
