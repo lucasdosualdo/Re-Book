@@ -6,33 +6,41 @@ import { useQuery } from "react-query";
 import { getBooks } from "../../services/searchBooksApi";
 
 export default function Search() {
-  const [liked, setLiked] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const teste = "harry potter";
-  const { data, isLoading, error } = useQuery(
-    ["search-books", teste],
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { data, error } = useQuery(
+    ["search-books", searchTerm],
     async () => {
-      return await getBooks(teste);
-    }
+      const response = await getBooks(searchTerm);
+      setIsLoading(false);
+      return response;
+    },
+    { refetchOnWindowFocus: false }
   );
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      console.log(searchTerm);
+
+  async function handlSearch(event) {
+    if (event.key === "Enter" || event.target.id === "search-icon") {
+      event.preventDefault();
+      setSearchTerm(event.target.value);
+      setIsLoading(true);
     }
-  };
+  }
+
   return (
     <>
       <Background>
         <div>
           <input
             placeholder="Buscar..."
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onKeyDown={handleKeyDown}
+            onKeyDown={handlSearch}
+            disabled={isLoading}
           />
+
           <IconContext.Provider
             value={{ color: "#FF006E", className: "search-icon" }}
           >
-            <IoSearch />
+            <IoSearch id="search-icon" onClick={handlSearch} />
           </IconContext.Provider>
         </div>
       </Background>
