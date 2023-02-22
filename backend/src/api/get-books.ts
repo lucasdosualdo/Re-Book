@@ -5,7 +5,7 @@ const GOOGLE_URL = "https://www.googleapis.com/books/v1/volumes?q=";
 
 export async function getBooks(searchTerm: string) {
   return axios.get(
-    `${GOOGLE_URL}intitle:${searchTerm}&maxResults=30&langRestrict=pt-BR&key=${API_KEY}`
+    `${GOOGLE_URL}intitle:${searchTerm}&maxResults=15&langRestrict=pt-BR&key=${API_KEY}`
   );
 }
 

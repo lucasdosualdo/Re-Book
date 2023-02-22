@@ -2,6 +2,8 @@ import { getBooks, getCover } from "../api/get-books";
 import { badRequestError } from "../errors/bad-request-error";
 import { notFoundError } from "../errors/not-found-error";
 
+const covers = {};
+
 export async function searchBooks(searchTerm: string) {
   const prunedTerm = trimSearchTerm(searchTerm);
 
@@ -40,23 +42,14 @@ async function formatBody(books) {
     };
   });
 
+  return booksBody;
+
   const newBooks: Promise<FormatBookParams>[] = await Promise.all(
     booksBody.map(replaceCover)
   );
 
   return newBooks;
 }
-
-type FormatBookParams = {
-  id: string;
-  title: string;
-  authors: string[];
-  description: string;
-  cover: string | Record<string, string> | null;
-  isbn: string[];
-  pages: number | null;
-  language: string | null;
-};
 
 async function replaceCover(
   book
@@ -77,6 +70,17 @@ async function replaceCover(
   }
   return book;
 }
+
+type FormatBookParams = {
+  id: string;
+  title: string;
+  authors: string[];
+  description: string;
+  cover: string | Record<string, string> | null;
+  isbn: string[];
+  pages: number | null;
+  language: string | null;
+};
 
 function trimSearchTerm(searchTerm: string) {
   const prunedTerm = searchTerm.trim().replace(/ /g, "+");
