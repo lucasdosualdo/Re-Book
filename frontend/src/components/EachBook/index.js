@@ -5,10 +5,13 @@ export default function EachBook({ key, book }) {
   const navigate = useNavigate();
   book.cover = changeCover(book.cover);
   const joinedAuthors = joinAuthors(book.authors);
+  const bookId = book.id;
   return (
     <>
       <BookBox
-        onClick={() => navigate("/book", { state: { ...book, joinedAuthors } })}
+        onClick={() =>
+          navigate(`/book/${bookId}`, { state: { ...book, joinedAuthors } })
+        }
       >
         <div>
           <img src={book.cover} alt="narutin" />

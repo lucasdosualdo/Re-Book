@@ -1,6 +1,7 @@
 import { Container, Cover, Descriptions } from "./style";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
+import { useParams } from "react-router-dom";
 import BookStatus from "../../components/BookStatus";
 import styled from "styled-components";
 
@@ -8,6 +9,7 @@ export default function Book() {
   const navigate = useNavigate();
   const location = useLocation();
   const book = location.state;
+  const { bookId } = useParams();
 
   return (
     <>
