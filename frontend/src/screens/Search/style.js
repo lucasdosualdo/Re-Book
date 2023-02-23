@@ -47,45 +47,15 @@ export const Background = styled.div`
 export const Container = styled.div`
   width: 100%;
   display: flex;
-
   flex-wrap: wrap;
   background-color: #021323;
   padding: 70px 0 0 20px;
-`;
 
-export const BookBox = styled.div`
-  width: 215px;
-  min-height: 310px;
-  //background-color: white;
-  margin: 0 20px 50px 0;
-  padding-top: calc(1.45);
-
-  color: rgb(204, 204, 204);
-  transition: all 0.3s ease;
-  :hover {
-    transform: scale(1.05);
-  }
-  > img {
-    width: 100%;
-
-    object-fit: cover;
-    border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(204, 204, 204, 0.2),
-      0 6px 6px rgba(204, 204, 204, 0.2);
-  }
-
-  > h3 {
+  h1 {
     font-weight: 700;
-    font-size: 16px;
-    margin-top: 10px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  > h5 {
-    font-size: 13px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    font-size: 28px;
+    margin-bottom: 40px;
+    color: #ff006e;
+    margin: 20px 10px 0 10px;
   }
 `;

@@ -1,29 +1,34 @@
 import { useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import { IconContext } from "react-icons/lib";
-import { Background, Container, BookBox } from "./style";
-import { useQuery } from "react-query";
+import { Background, Container } from "./style";
 import { getBooks } from "../../services/searchBooksApi";
+import EachBook from "../../components/EachBook";
 
 export default function Search() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
-  const { data, error } = useQuery(
-    ["search-books", searchTerm],
-    async () => {
-      const response = await getBooks(searchTerm);
-      setIsLoading(false);
-      return response;
-    },
-    { refetchOnWindowFocus: false }
-  );
+  const [books, setBooks] = useState([]);
+  const [error, setError] = useState(null);
 
   async function handlSearch(event) {
-    if (event.key === "Enter" || event.target.id === "search-icon") {
+    if (
+      (event.key === "Enter" || event.target.id === "search-icon") &&
+      searchTerm
+    ) {
       event.preventDefault();
-      setSearchTerm(event.target.value);
       setIsLoading(true);
+      setBooks([]);
+      setError(null);
+      try {
+        const data = await getBooks(searchTerm);
+        setBooks(data);
+      } catch (error) {
+        console.error(error);
+        setError("Não foi possível encontrar livros pelo título procurado.");
+      }
+      setIsLoading(false);
+      setSearchTerm(null);
     }
   }
 
@@ -35,6 +40,7 @@ export default function Search() {
             placeholder="Buscar..."
             onKeyDown={handlSearch}
             disabled={isLoading}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
 
           <IconContext.Provider
@@ -45,86 +51,11 @@ export default function Search() {
         </div>
       </Background>
       <Container>
-        <BookBox>
-          <img
-            src="https://books.google.com/books/content?id=EnGiDwAAQBAJ&printsec=frontcover&img=1&zoom=0&edge=curl&source=gbs_api"
-            alt="narutin"
-          />
-          <h3>DOM CASMURRO</h3>
-          <h5>Machado de Assis</h5>
-        </BookBox>
-        <BookBox>
-          <img
-            src="https://books.google.com/books/content?id=EnGiDwAAQBAJ&printsec=frontcover&img=1&zoom=0&edge=curl&source=gbs_api"
-            alt="narutin"
-          />
-          <h3>DOM CASMURRO</h3>
-          <h5>Machado de Assis</h5>
-        </BookBox>
-        <BookBox>
-          <img
-            src="https://books.google.com/books/content?id=EnGiDwAAQBAJ&printsec=frontcover&img=1&zoom=0&edge=curl&source=gbs_api"
-            alt="narutin"
-          />
-          <h3>DOM CASMURRO</h3>
-          <h5>Machado de Assis</h5>
-        </BookBox>
-        <BookBox>
-          <img
-            src="https://books.google.com/books/content?id=EnGiDwAAQBAJ&printsec=frontcover&img=1&zoom=0&edge=curl&source=gbs_api"
-            alt="narutin"
-          />
-          <h3>DOM CASMURRO</h3>
-          <h5>Machado de Assis</h5>
-        </BookBox>
-        <BookBox>
-          <img
-            src="https://books.google.com/books/content?id=EnGiDwAAQBAJ&printsec=frontcover&img=1&zoom=0&edge=curl&source=gbs_api"
-            alt="narutin"
-          />
-          <h3>DOM CASMURRO</h3>
-          <h5>Machado de Assis</h5>
-        </BookBox>
-        <BookBox>
-          <img
-            src="https://books.google.com/books/content?id=EnGiDwAAQBAJ&printsec=frontcover&img=1&zoom=0&edge=curl&source=gbs_api"
-            alt="narutin"
-          />
-          <h3>DOM CASMURRO</h3>
-          <h5>Machado de Assis</h5>
-        </BookBox>
-        <BookBox>
-          <img
-            src="https://books.google.com/books/content?id=EnGiDwAAQBAJ&printsec=frontcover&img=1&zoom=0&edge=curl&source=gbs_api"
-            alt="narutin"
-          />
-          <h3>DOM CASMURRO</h3>
-          <h5>Machado de Assis</h5>
-        </BookBox>
-        <BookBox>
-          <img
-            src="https://books.google.com/books/content?id=EnGiDwAAQBAJ&printsec=frontcover&img=1&zoom=0&edge=curl&source=gbs_api"
-            alt="narutin"
-          />
-          <h3>DOM CASMURRO</h3>
-          <h5>Machado de Assis</h5>
-        </BookBox>
-        <BookBox>
-          <img
-            src="https://books.google.com/books/content?id=EnGiDwAAQBAJ&printsec=frontcover&img=1&zoom=0&edge=curl&source=gbs_api"
-            alt="narutin"
-          />
-          <h3>DOM CASMURRO</h3>
-          <h5>Machado de Assis</h5>
-        </BookBox>
-        <BookBox>
-          <img
-            src="https://books.google.com/books/content?id=EnGiDwAAQBAJ&printsec=frontcover&img=1&zoom=0&edge=curl&source=gbs_api"
-            alt="narutin"
-          />
-          <h3>DOM CASMURRO</h3>
-          <h5>Machado de Assis</h5>
-        </BookBox>
+        {error ? (
+          <h1>{error}</h1>
+        ) : (
+          books.map((book, index) => <EachBook key={index} book={book} />)
+        )}
       </Container>
     </>
   );
