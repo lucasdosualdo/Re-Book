@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-
+position: relative;
   display: flex;
   padding-left: 20vh;
-  padding-top: 60px;
+  padding-top: 100px;
   @media (max-width: 1050px) {
     padding-left: 0;
     flex-direction: column;
@@ -19,6 +19,7 @@ export const Cover = styled.div`
   padding-top: calc(1.45);
   box-shadow: 0 10px 20px rgba(204, 204, 204, 0.2),
     0 6px 6px rgba(204, 204, 204, 0.2);
+
   > img {
     width: 100%;
     height: 100%;
