@@ -1,5 +1,6 @@
 import { BookBox } from "./style";
 import { useNavigate } from "react-router-dom";
+import notAvailable from "../../assets/images/cover-not-available.svg";
 
 export default function EachBook({ key, book }) {
   const navigate = useNavigate();
@@ -27,8 +28,7 @@ function changeCover(cover) {
   if (cover?.thumbnail) {
     cover = cover?.thumbnail;
   } else if (!cover) {
-    cover =
-      "https://books.google.com/books/content?id=EnGiDwAAQBAJ&printsec=frontcover&img=1&zoom=0&edge=curl&source=gbs_api";
+    cover = notAvailable;
   }
   return cover;
 }
