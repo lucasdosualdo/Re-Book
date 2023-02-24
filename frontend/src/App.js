@@ -5,21 +5,24 @@ import Search from "./screens/Search";
 import Book from "./screens/Book";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
+import { BooksProvider } from "./contexts/BooksContext";
 
 export default function App() {
   const queryClient = new QueryClient();
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <GlobalStyle />
-          <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/book/:bookId" element={<Book />} />
-          </Routes>
-        </BrowserRouter>
+        <BooksProvider>
+          <BrowserRouter>
+            <GlobalStyle />
+            <Header />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/book/:bookId" element={<Book />} />
+            </Routes>
+          </BrowserRouter>
+        </BooksProvider>
       </QueryClientProvider>
     </>
   );

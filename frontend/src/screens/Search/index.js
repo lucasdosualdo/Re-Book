@@ -2,14 +2,16 @@ import { useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import { IconContext } from "react-icons/lib";
 import { Background, Container } from "./style";
-import { getBooks } from "../../services/searchBooksApi";
+import { getBooksByTitle } from "../../services/searchBooksApi";
 import EachBook from "../../components/EachBook";
+import { useBooks } from "../../contexts/BooksContext";
 
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [books, setBooks] = useState([]);
+  //const [books, setBooks] = useState([]);
   const [error, setError] = useState(null);
+  const { books, setBooks } = useBooks();
 
   async function handlSearch(event) {
     if (
@@ -21,7 +23,7 @@ export default function Search() {
       setBooks([]);
       setError(null);
       try {
-        const data = await getBooks(searchTerm);
+        const data = await getBooksByTitle(searchTerm);
         setBooks(data);
       } catch (error) {
         console.error(error);
@@ -54,7 +56,7 @@ export default function Search() {
         {error ? (
           <h1>{error}</h1>
         ) : (
-          books.map((book, index) => <EachBook key={index} book={book} />)
+          books?.map((book, index) => <EachBook key={index} book={book} />)
         )}
       </Container>
     </>
