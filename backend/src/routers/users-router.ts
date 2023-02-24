@@ -1,9 +1,5 @@
 import { Router } from "express";
-
-import {
-  validateBody,
-  validateParams,
-} from "../middlewares/validation-middleware";
+import { validateBody } from "../middlewares/validation-middleware";
 import { createUserSchema } from "../schemas/users-schema";
 
 import { usersPost } from "../controllers/users-controller";

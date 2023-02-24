@@ -1,6 +1,7 @@
-import { getBooks, getCover } from "../api/get-books";
+import { getBooksByTitle, getCover, getBooksBySubject } from "../api/get-books";
 import { badRequestError } from "../errors/bad-request-error";
 import { notFoundError } from "../errors/not-found-error";
+import { SubjectParams } from "../protocols";
 
 const covers = {};
 
@@ -8,7 +9,25 @@ export async function searchBooks(searchTerm: string) {
   const prunedTerm = trimSearchTerm(searchTerm);
 
   try {
-    const response = await getBooks(prunedTerm);
+    const response = await getBooksByTitle(prunedTerm);
+
+
+    if (!response.data.totalItems) throw notFoundError();
+
+    return response.data;
+    const formatBooks = await formatBody(response.data);
+
+    return formatBooks;
+  } catch (error) {
+    console.log(error.message);
+    throw badRequestError();
+  }
+}
+
+export async function searchBySubject(subject: SubjectParams) {
+
+  try {
+    const response = await getBooksBySubject(subject);
 
     if (!response.data.totalItems) throw notFoundError();
 
@@ -20,6 +39,7 @@ export async function searchBooks(searchTerm: string) {
     throw badRequestError();
   }
 }
+
 
 async function formatBody(books) {
   const booksWithDescription = books.items.filter(
@@ -42,7 +62,6 @@ async function formatBody(books) {
     };
   });
 
-  return booksBody;
 
   const newBooks: Promise<FormatBookParams>[] = await Promise.all(
     booksBody.map(replaceCover)
@@ -90,6 +109,6 @@ function trimSearchTerm(searchTerm: string) {
   return prunedTerm;
 }
 
-const searchBooksService = { searchBooks };
+const searchBooksService = { searchBooks, searchBySubject };
 
 export default searchBooksService;

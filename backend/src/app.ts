@@ -5,6 +5,7 @@ import {
   authenticationRouter,
   usersRouter,
   searchBooksRouter,
+  subjectsRouter,
 } from "./routers";
 import { handleApplicationErrors } from "./middlewares/error-handling-middleware";
 
@@ -21,6 +22,7 @@ app
   .use("/users", usersRouter)
   .use("/auth", authenticationRouter)
   .use("/search", searchBooksRouter)
+  .use("/subjects", subjectsRouter)
   .use(handleApplicationErrors);
 
 // app.get("/googlebook", async (req: Request, res: Response) => {
