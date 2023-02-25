@@ -16,6 +16,7 @@ export default function Gender({ gender }) {
     event.preventDefault();
     try {
       const data = await getBooksBySubject(subject);
+      console.log(data);
       setBooks(data);
       navigate("/search");
     } catch (error) {

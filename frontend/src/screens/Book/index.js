@@ -16,14 +16,17 @@ export default function Book() {
       <Container>
         <BackIcon onClick={() => navigate(-1)}></BackIcon>
         <Cover>
-          <img src={book?.cover} alt="narutin" />
+          <img src={book.cover} alt="narutin" />
         </Cover>
         <Descriptions>
-          <h1>{book?.title}</h1>
-          <p>{book?.description}</p>
-          <h3>
-            Autor: <span>{book?.joinedAuthors}</span>
-          </h3>
+          <h1>{book.title}</h1>
+          <p>{book.description}</p>
+          {book.joinedAuthors && (
+            <h3>
+              Autor: <span>{book?.joinedAuthors}</span>
+            </h3>
+          )}
+
           <h3>
             Gênero: <span>Romance</span>
           </h3>

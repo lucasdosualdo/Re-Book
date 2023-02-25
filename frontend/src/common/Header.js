@@ -4,11 +4,13 @@ import { IoSearch, IoClose } from "react-icons/io5";
 import { IconContext } from "react-icons/lib";
 import SearchBar from "../components/SearchBar";
 import { CSSTransition } from "react-transition-group";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
   const [active, setActive] = useState("nav-menu");
   const [icon, setIcon] = useState("nav-toggler");
   const [disabled, setDisabled] = useState(true);
+  const navigate = useNavigate();
   const navToggle = () => {
     if (active === "nav-menu") {
       setActive("nav-menu nav-active");
@@ -26,7 +28,6 @@ export default function Header() {
         !event.target.closest(".search-icon")
       ) {
         setDisabled(true);
-
       }
     }
     document.addEventListener("click", handleClickOutside);
@@ -36,11 +37,13 @@ export default function Header() {
     };
   }, []);
 
- 
   return (
     <nav className="nav">
-      <a href="#" className="nav-brand">
+      <a href="#" className="nav-brand" onClick={() => navigate("/")}>
         Home
+      </a>
+      <a href="#" className="nav-brand" onClick={() => navigate("/search")}>
+        Search
       </a>
       <ul className={active}>
         <li className="nav-item">
@@ -69,7 +72,7 @@ export default function Header() {
           </a>
         </li>
       </ul>
-      <SearchContainer >
+      <SearchContainer>
         <CSSTransition
           in={!disabled}
           timeout={400}
@@ -83,13 +86,9 @@ export default function Header() {
           value={{ color: "#cccccc", className: "search-icon" }}
         >
           {disabled ? (
-        
-              <IoSearch onClick={() => setDisabled(!disabled)} />
-   
+            <IoSearch onClick={() => setDisabled(!disabled)} />
           ) : (
-           
-              <IoClose onClick={() => setDisabled(!disabled)} />
-           
+            <IoClose onClick={() => setDisabled(!disabled)} />
           )}
         </IconContext.Provider>
       </SearchContainer>

@@ -9,7 +9,6 @@ import { useBooks } from "../../contexts/BooksContext";
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  //const [books, setBooks] = useState([]);
   const [error, setError] = useState(null);
   const { books, setBooks } = useBooks();
 
