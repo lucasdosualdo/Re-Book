@@ -59,3 +59,13 @@ export const Container = styled.div`
     margin: 20px 10px 0 10px;
   }
 `;
+
+export const Pages = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  button {
+    background-color: red;
+    margin-right: 10px;
+    color: white;
+  }
+`;

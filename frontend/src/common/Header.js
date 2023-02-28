@@ -5,12 +5,16 @@ import { IconContext } from "react-icons/lib";
 import SearchBar from "../components/SearchBar";
 import { CSSTransition } from "react-transition-group";
 import { useNavigate } from "react-router-dom";
+import { useBooks } from "../contexts/BooksContext";
+import { useIndexes } from "../contexts/IndexesContext";
 
 export default function Header() {
   const [active, setActive] = useState("nav-menu");
   const [icon, setIcon] = useState("nav-toggler");
   const [disabled, setDisabled] = useState(true);
   const navigate = useNavigate();
+  const { setBooks } = useBooks();
+  const { setIndexes } = useIndexes();
   const navToggle = () => {
     if (active === "nav-menu") {
       setActive("nav-menu nav-active");
@@ -39,7 +43,15 @@ export default function Header() {
 
   return (
     <nav className="nav">
-      <a href="#" className="nav-brand" onClick={() => navigate("/")}>
+      <a
+        href="#"
+        className="nav-brand"
+        onClick={() => {
+          navigate("/");
+          setBooks(null);
+          setIndexes(null);
+        }}
+      >
         Home
       </a>
       <a href="#" className="nav-brand" onClick={() => navigate("/search")}>

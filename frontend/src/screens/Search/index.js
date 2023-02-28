@@ -1,16 +1,20 @@
 import { useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import { IconContext } from "react-icons/lib";
-import { Background, Container } from "./style";
+import { Background, Container, Pages } from "./style";
 import { getBooksByTitle } from "../../services/searchBooksApi";
 import EachBook from "../../components/EachBook";
 import { useBooks } from "../../contexts/BooksContext";
+import { useIndexes } from "../../contexts/IndexesContext";
 
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const { books, setBooks } = useBooks();
+  const { indexes, setIndexes } = useIndexes();
+  const booksPerPage = 24;
+  console.log(indexes);
 
   async function handlSearch(event) {
     if (
@@ -19,11 +23,16 @@ export default function Search() {
     ) {
       event.preventDefault();
       setIsLoading(true);
-      setBooks([]);
+      setBooks(null);
+      setIndexes(null);
       setError(null);
       try {
         const data = await getBooksByTitle(searchTerm);
         setBooks(data);
+        const pagesQuantity = Math.ceil(data.totalItems / booksPerPage);
+        setIndexes(
+          Array.from({ length: pagesQuantity }, (_, index) => index + 1)
+        );
       } catch (error) {
         console.error(error);
         setError("Não foi possível encontrar livros pelo título procurado.");
@@ -55,9 +64,15 @@ export default function Search() {
         {error ? (
           <h1>{error}</h1>
         ) : (
-          books?.map((book, index) => <EachBook key={index} book={book} />)
+          books?.items.map((book, index) => (
+            <EachBook key={index} book={book} />
+          ))
         )}
       </Container>
+      <Pages>
+        {indexes.length > 1 &&
+          indexes?.map((index) => <button>{index}</button>)}
+      </Pages>
     </>
   );
 }
