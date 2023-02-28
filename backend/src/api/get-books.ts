@@ -12,7 +12,7 @@ export async function getBooksByTitle(searchTerm: string) {
 
 export async function getBooksBySubject(searchTerm: SubjectParams) {
   return axios.get(
-    `${GOOGLE_URL}subjects:${searchTerm}&maxResults=40&key=${API_KEY}`
+    `${GOOGLE_URL}subjects:${searchTerm}&maxResults=10&key=${API_KEY}`
   );
 }
 

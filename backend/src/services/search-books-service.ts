@@ -12,10 +12,14 @@ export async function searchBooks(searchTerm: string) {
     const response = await getBooksByTitle(prunedTerm);
 
     if (!response.data.totalItems) throw notFoundError();
+    const totalItems: number = response.data.totalItems;
 
-    const formatBooks = await formatBody(response.data);
-
-    return formatBooks;
+    const formatedBooks = await formatBody(response.data);
+    const books = {
+      totalItems,
+      items: formatedBooks,
+    };
+    return books;
   } catch (error) {
     throw badRequestError();
   }
@@ -26,10 +30,13 @@ export async function searchBySubject(subject: SubjectParams) {
     const response = await getBooksBySubject(subject);
 
     if (!response.data.totalItems) throw notFoundError();
-
-    const formatBooks = await formatBody(response.data);
-
-    return formatBooks;
+    const totalItems: number = response.data.totalItems;
+    const formatedBooks = await formatBody(response.data);
+    const books = {
+      totalItems,
+      items: formatedBooks,
+    };
+    return books;
   } catch (error) {
     throw badRequestError();
   }
@@ -44,7 +51,7 @@ async function formatBody(books) {
     return {
       id: book.id,
       title: book.volumeInfo.title,
-      authors: book.volumeInfo.authors,
+      authors: book.volumeInfo.authors ? book.volumeInfo.authors : null,
 
       description: book.volumeInfo.description
         ? book.volumeInfo.description
