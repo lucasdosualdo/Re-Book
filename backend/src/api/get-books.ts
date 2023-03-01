@@ -4,15 +4,15 @@ import { SubjectParams } from "../protocols";
 const API_KEY = process.env.GOOGLE_API_KEY;
 const GOOGLE_URL = "https://www.googleapis.com/books/v1/volumes?q=";
 
-export async function getBooksByTitle(searchTerm: string) {
+export async function getBooksByTitle(searchTerm: string, startIndex: string) {
   return axios.get(
-    `${GOOGLE_URL}intitle:${searchTerm}&maxResults=15&langRestrict=pt-BR&key=${API_KEY}`
+    `${GOOGLE_URL}intitle:${searchTerm}&maxResults=24&startIndex=${startIndex}&langRestrict=pt-BR&key=${API_KEY}`
   );
 }
 
-export async function getBooksBySubject(searchTerm: SubjectParams) {
+export async function getBooksBySubject(searchTerm: SubjectParams, startIndex: string) {
   return axios.get(
-    `${GOOGLE_URL}subjects:${searchTerm}&maxResults=10&key=${API_KEY}`
+    `${GOOGLE_URL}subjects:${searchTerm}&maxResults=40&startIndex=${startIndex}&key=${API_KEY}`
   );
 }
 

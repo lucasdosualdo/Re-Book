@@ -20,4 +20,5 @@ export type SubjectParams = {
     | "science"
     | "humor"
     | "history";
+  startIndex?: string;
 };

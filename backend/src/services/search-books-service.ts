@@ -5,11 +5,11 @@ import { SubjectParams } from "../protocols";
 
 const covers = {};
 
-export async function searchBooks(searchTerm: string) {
+export async function searchBooks(searchTerm: string, startIndex: string) {
   const prunedTerm = trimSearchTerm(searchTerm);
 
   try {
-    const response = await getBooksByTitle(prunedTerm);
+    const response = await getBooksByTitle(prunedTerm, startIndex);
 
     if (!response.data.totalItems) throw notFoundError();
     const totalItems: number = response.data.totalItems;
@@ -25,9 +25,9 @@ export async function searchBooks(searchTerm: string) {
   }
 }
 
-export async function searchBySubject(subject: SubjectParams) {
+export async function searchBySubject(subject: SubjectParams, startIndex: string) {
   try {
-    const response = await getBooksBySubject(subject);
+    const response = await getBooksBySubject(subject, startIndex);
 
     if (!response.data.totalItems) throw notFoundError();
     const totalItems: number = response.data.totalItems;

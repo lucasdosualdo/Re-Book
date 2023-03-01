@@ -25,4 +25,5 @@ export const subjectsSchema = Joi.object<SubjectParams>({
   subject: Joi.string()
     .valid(...allowedSubjects)
     .required(),
+  startIndex: Joi.string(),
 });

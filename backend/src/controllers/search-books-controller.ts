@@ -4,10 +4,14 @@ import searchBooksService from "../services/search-books-service";
 import { SubjectParams } from "../protocols";
 
 export async function getSearch(req: Request, res: Response) {
-  const { searchTerm } = req.query as { searchTerm: string };
+  const { searchTerm, startIndex } = req.query as {
+    searchTerm: string;
+    startIndex: string;
+  };
+
   if (!searchTerm) return res.sendStatus(httpStatus.BAD_REQUEST);
   try {
-    const books = await searchBooksService.searchBooks(searchTerm);
+    const books = await searchBooksService.searchBooks(searchTerm, startIndex);
     return res.status(httpStatus.OK).send(books);
   } catch (error) {
     if (error.name === "NotFoundError") {
@@ -18,10 +22,13 @@ export async function getSearch(req: Request, res: Response) {
 }
 
 export async function getSubject(req: Request, res: Response) {
-  const { subject } = req.query as { subject: SubjectParams };
+  const { subject, startIndex } = req.query as {
+    subject: SubjectParams;
+    startIndex: string;
+  };
   if (!subject) return res.sendStatus(httpStatus.BAD_REQUEST);
   try {
-    const books = await searchBooksService.searchBySubject(subject);
+    const books = await searchBooksService.searchBySubject(subject, startIndex);
     return res.status(httpStatus.OK).send(books);
   } catch (error) {
     if (error.name === "NotFoundError") {
