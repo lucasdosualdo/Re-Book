@@ -4,8 +4,11 @@ const IndexesContext = createContext();
 
 export function IndexesProvider({ children }) {
   const [indexes, setIndexes] = useState(null);
+  const [pageNumber, setPageNumber] = useState(null);
   return (
-    <IndexesContext.Provider value={{ indexes, setIndexes }}>
+    <IndexesContext.Provider
+      value={{ indexes, setIndexes, pageNumber, setPageNumber }}
+    >
       {children}
     </IndexesContext.Provider>
   );

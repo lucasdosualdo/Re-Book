@@ -63,9 +63,19 @@ export const Container = styled.div`
 export const Pages = styled.div`
   display: flex;
   flex-wrap: wrap;
-  button {
-    background-color: red;
-    margin-right: 10px;
-    color: white;
-  }
+  margin: 0 0 20px 20px;
+`;
+
+export const PageButton = styled.button`
+  border: none;
+  font-weight: 700;
+  font-size: 18px;
+  width: 40px;
+  height: 40px;
+  background-color: ${(props) =>
+    props.clicked ? "#ff006e" : "rgb(204, 204, 204)"};
+  margin-right: 10px;
+  color: ${(props) => (props.clicked ? "rgb(204, 204, 204)" : "#ff006e")};
+  cursor: ${(props) => (props.disabled ? "default" : "pointer")};
+  opacity: ${(props) => (props.isLoading ? "0.5" : "1")};
 `;

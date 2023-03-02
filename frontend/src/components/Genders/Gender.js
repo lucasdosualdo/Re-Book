@@ -10,20 +10,27 @@ export default function Gender({ gender }) {
   const title = gender[0];
   const color = gender[1];
   const image = gender[2];
-  const { setBooks } = useBooks();
-  const { setIndexes } = useIndexes();
+  const { setBooks, setSearchTerm, setIsSubject } = useBooks();
+  const { setIndexes, pageNumber, setPageNumber } = useIndexes();
   const subject = useSubject(title);
-  const booksPerPage = 40;
+  const maxBooksPerPage = 40;
+  const limitPages = 20;
 
   async function handleSubject(event) {
     event.preventDefault();
     try {
-      const data = await getBooksBySubject(subject);
+      const data = await getBooksBySubject(subject, 0);
       setBooks(data);
-      const pagesQuantity = Math.ceil(data.totalItems / booksPerPage);
+      setSearchTerm(subject);
+      setIsSubject(true);
+      const pages = Math.ceil(data.totalItems / maxBooksPerPage);
       setIndexes(
-        Array.from({ length: pagesQuantity }, (_, index) => index + 1)
+        Array.from(
+          { length: pages > limitPages ? limitPages : pages },
+          (_, index) => index + 1
+        )
       );
+      setPageNumber(1);
       navigate("/search");
     } catch (error) {
       console.error(error);

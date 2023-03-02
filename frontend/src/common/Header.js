@@ -13,7 +13,7 @@ export default function Header() {
   const [icon, setIcon] = useState("nav-toggler");
   const [disabled, setDisabled] = useState(true);
   const navigate = useNavigate();
-  const { setBooks } = useBooks();
+  const { setBooks, setSearchTerm } = useBooks();
   const { setIndexes } = useIndexes();
   const navToggle = () => {
     if (active === "nav-menu") {
@@ -49,6 +49,7 @@ export default function Header() {
         onClick={() => {
           navigate("/");
           setBooks(null);
+          setSearchTerm(null);
           setIndexes(null);
         }}
       >
