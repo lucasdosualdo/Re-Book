@@ -4,7 +4,7 @@ import { IoSearch, IoClose } from "react-icons/io5";
 import { IconContext } from "react-icons/lib";
 import SearchBar from "../components/SearchBar";
 import { CSSTransition } from "react-transition-group";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useBooks } from "../contexts/BooksContext";
 import { useIndexes } from "../contexts/IndexesContext";
 
@@ -15,6 +15,19 @@ export default function Header() {
   const navigate = useNavigate();
   const { setBooks, setSearchTerm } = useBooks();
   const { setIndexes } = useIndexes();
+  const { pathname } = useLocation();
+
+  const isSigninOrSignup = pathname === "/signin" || pathname === "/signup";
+
+  useEffect(() => {
+    if (isSigninOrSignup) {
+      document.body.classList.add("no-header");
+      document.body.style.paddingTop = "0";
+    } else {
+      document.body.classList.remove("no-header");
+      document.body.style.paddingTop = "8vh";
+    }
+  }, [isSigninOrSignup]);
   const navToggle = () => {
     if (active === "nav-menu") {
       setActive("nav-menu nav-active");
@@ -42,7 +55,7 @@ export default function Header() {
   }, []);
 
   return (
-    <nav className="nav">
+    <nav className={`nav ${isSigninOrSignup ? "no-header" : ""}`}>
       <a
         href="#"
         className="nav-brand"

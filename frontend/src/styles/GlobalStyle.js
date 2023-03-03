@@ -87,7 +87,7 @@ a {
   left: 0;
   right: 0;
   width: 100%;
-  z-index: 1;
+  z-index: 2;
 }
 .nav-brand {
   text-transform: uppercase;
@@ -113,7 +113,7 @@ a {
     flex-direction: column;
     transform: translateX(100%);
     transition: 0.5s ease-in;
-    z-index: 2;
+
   }
 
 
@@ -123,6 +123,7 @@ a {
 .nav-toggler {
     display: block;
     cursor: pointer;
+   
   }
 
 .nav-toggler div {
@@ -131,6 +132,7 @@ a {
   margin: 0.4rem;
   background: rgb(204, 204, 204);
   transition: 0.3s ease-in;
+
 }
 
 /* @media screen and (max-width: 768px) {
@@ -191,6 +193,13 @@ a {
   transition: opacity 400ms ease-out;
 }
 
+.hide {
+  display: none;
+}
+
+nav.no-header {
+  display: none;
+}
 
 `;
 
