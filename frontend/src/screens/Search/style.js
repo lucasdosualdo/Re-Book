@@ -78,4 +78,5 @@ export const PageButton = styled.button`
   color: ${(props) => (props.clicked ? "rgb(204, 204, 204)" : "#ff006e")};
   cursor: ${(props) => (props.disabled ? "default" : "pointer")};
   opacity: ${(props) => (props.isLoading ? "0.5" : "1")};
+  border-radius: 100%;
 `;

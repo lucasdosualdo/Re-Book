@@ -69,6 +69,7 @@ export default function Search() {
         setBooks(data);
       }
       setPageNumber(index);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {
       console.error(error);
       setError(
