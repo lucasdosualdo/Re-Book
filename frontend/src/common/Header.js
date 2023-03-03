@@ -28,6 +28,7 @@ export default function Header() {
       document.body.style.paddingTop = "8vh";
     }
   }, [isSigninOrSignup]);
+  
   const navToggle = () => {
     if (active === "nav-menu") {
       setActive("nav-menu nav-active");

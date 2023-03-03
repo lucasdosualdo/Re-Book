@@ -7,8 +7,8 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { BooksProvider } from "./contexts/BooksContext";
 import { IndexesProvider } from "./contexts/IndexesContext";
-import Signin from "./screens/Signin";
-import Signup from "./screens/Signup";
+import Signin from "./screens/Authentication/Signin";
+import Signup from "./screens/Authentication/Signup";
 
 export default function App() {
   const queryClient = new QueryClient();

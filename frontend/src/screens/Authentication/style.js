@@ -1,105 +1,83 @@
 import styled from "styled-components";
-import { useNavigate, Link } from "react-router-dom";
 
-export default function Signin() {
-  return (
-    <Wrapper>
-      <TopContainer>
-        <div>
-          <Title>linkr</Title>
-          <Branding>
-            save, share and discover <br></br> the best links on the web
-          </Branding>
-        </div>
-      </TopContainer>
-      <LoginContainer>
-        <Loginform>
-          <input
-            type="email"
-            name="email"
-            placeholder="e-mail"
-            // disabled={isDisable}
-            required
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="password"
-            // disabled={isDisable}
-            required
-          />
-          <Loginbutton>{/* {load} */}</Loginbutton>
-          <Link to={`/signup`}>
-            <New>First time? Create an account!</New>
-          </Link>
-        </Loginform>
-      </LoginContainer>
-    </Wrapper>
-  );
-}
-
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   height: 100vh;
   width: 100vw;
   height: 100vh;
-  z-index: 5;
+  z-index: 1;
   @media (min-width: 614px) {
     display: flex;
   }
 `;
-const TopContainer = styled.div`
+export const TopContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 26%;
+  height: 30%;
   width: 100%;
-  background-color: #151515;
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
   @media (min-width: 614px) {
     height: 100%;
     width: 60%;
-    div {
-      align-items: flex-start;
-    }
   }
 `;
-const Title = styled.div`
-  font-family: "Passion One", cursive;
+export const Title = styled.div`
   font-weight: 700;
   font-size: 76px;
   line-height: 84px;
-  letter-spacing: 0.05em;
-  color: #ffffff;
+  letter-spacing: 0.08em;
+
+  color: #ff006e;
+  font-family: "Anton", sans-serif;
+  margin-bottom: 20px;
+  p {
+    font-style: italic;
+    font-family: "Lato", sans-serif;
+    letter-spacing: 0.01em;
+    display: inline;
+    color: #ffffff;
+  }
+
+  @media (max-width: 614px) {
+    font-size: 40px;
+    margin-bottom: 0;
+  }
 `;
-const Branding = styled.div`
+export const Branding = styled.div`
   font-family: "Oswald", sans-serif;
   font-weight: 700;
   font-size: 23px;
   color: #ffffff;
+  display: flex;
+  justify-content: center;
+
+  img {
+    width: 60%;
+  }
+  @media (max-width: 614px) {
+    img {
+      width: 100%;
+      height: 15vh;
+    }
+  }
 `;
-const LoginContainer = styled.div`
+export const LoginContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  margin-top: 8%;
+  padding: 5vh 0;
   background-color: #333333;
-
+  height: 70%;
   @media (min-width: 614px) {
     height: 100%;
     width: 40%;
-    margin-top: 0;
+
     justify-content: center;
   }
 `;
-const New = styled.p`
+export const New = styled.p`
   a {
     text-decoration: none;
   }
@@ -111,7 +89,7 @@ const New = styled.p`
   text-decoration-line: underline;
   color: #ffffff;
 `;
-const Loginform = styled.form`
+export const Loginform = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -132,7 +110,7 @@ const Loginform = styled.form`
     }
   }
 `;
-const Loginbutton = styled.button`
+export const Loginbutton = styled.button`
   height: 55px;
   width: 85%;
   display: flex;
