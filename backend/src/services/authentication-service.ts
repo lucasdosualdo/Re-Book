@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { SignInParams } from "../protocols";
 import { invalidCredentialsError } from "../errors/invalid-credentials-error";
+import { cannotCreateSessionError } from "../errors/cannot-create-session-error";
 import userRepository from "../repositories/user-repository";
 import sessionRepository from "../repositories/session-repository";
 import { exclude } from "../utils/prisma-utils";
@@ -26,24 +27,35 @@ async function signIn(params: SignInParams): Promise<SignInResult> {
 
 async function getUserOrFail(email: string): Promise<GetUserOrFailResult> {
   const user = await userRepository.findByEmail(email);
+
   if (!user) throw invalidCredentialsError();
 
   return user;
 }
 
 async function validatePasswordOrFail(password: string, userPassword: string) {
-  const isPasswordValid = await bcrypt.compare(password, userPassword);
-  if (!isPasswordValid) throw invalidCredentialsError();
+  const isPasswordValid: boolean = await bcrypt.compare(password, userPassword);
+
+  if (!isPasswordValid) {
+    throw invalidCredentialsError();
+  }
 }
 
 async function createSession(userId: number) {
-  const token: string = jwt.sign(userId, process.env.JWT_SECRET);
-  await sessionRepository.create({
+  const token: string = jwt.sign({ userId }, process.env.JWT_SECRET);
+  await updateToken(userId);
+  const session = await sessionRepository.create({
     token,
     userId,
   });
 
+  if (!session) throw cannotCreateSessionError();
+
   return token;
+}
+
+async function updateToken(userId: number) {
+  await sessionRepository.update(userId);
 }
 
 type GetUserOrFailResult = Pick<users, "id" | "email" | "password">;

@@ -69,7 +69,7 @@ model profile {
 model sessions {
   id        Int      @id @default(autoincrement())
   userId    Int
-  token     String   @unique
+  token     String
   valid     Boolean  @default(true)
   createdAt DateTime @default(now()) @db.Timestamp(6)
   updatedAt DateTime @default(now()) @db.Timestamp(6)
@@ -80,7 +80,7 @@ model users {
   id        Int         @id @default(autoincrement())
   name      String      @db.VarChar(25)
   email     String      @unique @db.VarChar(50)
-  password  String      @unique @db.VarChar(30)
+  password  String      @unique
   createdAt DateTime    @default(now()) @db.Timestamp(6)
   updatedAt DateTime    @default(now()) @db.Timestamp(6)
   comments  comments[]

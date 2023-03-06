@@ -7,25 +7,16 @@ export function handleApplicationErrors(
   _req: Request,
   res: Response
 ) {
-  if (err.name === "CannotEnrollBeforeStartDateError") {
-    return res.status(httpStatus.BAD_REQUEST).send({
-      message: err.message,
-    });
-  }
-
   if (err.name === "ConflictError" || err.name === "DuplicatedEmailError") {
     return res.status(httpStatus.CONFLICT).send({
       message: err.message,
     });
   }
 
-  if (err.name === "InvalidCredentialsError") {
-    return res.status(httpStatus.UNAUTHORIZED).send({
-      message: err.message,
-    });
-  }
-
-  if (err.name === "UnauthorizedError") {
+  if (
+    err.name === "InvalidCredentialsError" ||
+    err.name === "UnauthorizedError"
+  ) {
     return res.status(httpStatus.UNAUTHORIZED).send({
       message: err.message,
     });
@@ -37,7 +28,17 @@ export function handleApplicationErrors(
     });
   }
 
-  if (err.name === "BadRequestError") {
+  if (err.name === "IncorrectPasswordError") {
+    return res.status(httpStatus.UNPROCESSABLE_ENTITY).send({
+      message: err.message,
+    });
+  }
+
+  if (
+    err.name === "BadRequestError" ||
+    err.name === "CannotCreateSessionError" ||
+    err.name === "CannotEnrollBeforeStartDateError"
+  ) {
     return res.status(httpStatus.BAD_REQUEST).send({
       message: err.message,
     });
