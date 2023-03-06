@@ -10,9 +10,12 @@ export async function getBooksByTitle(searchTerm: string, startIndex: string) {
   );
 }
 
-export async function getBooksBySubject(searchTerm: SubjectParams, startIndex: string) {
+export async function getBooksBySubject(
+  searchTerm: SubjectParams,
+  startIndex: string
+) {
   return axios.get(
-    `${GOOGLE_URL}subjects:${searchTerm}&maxResults=40&startIndex=${startIndex}&key=${API_KEY}`
+    `${GOOGLE_URL}subjects:${searchTerm}&maxResults=40&orderBy=relevance&startIndex=${startIndex}&key=${API_KEY}`
   );
 }
 

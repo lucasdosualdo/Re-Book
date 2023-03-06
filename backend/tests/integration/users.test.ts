@@ -38,7 +38,7 @@ describe("POST /users", () => {
 
       const response = await server.post("/users").send(body);
 
-      expect(response.status).toBe(httpStatus.BAD_REQUEST);
+      expect(response.status).toBe(httpStatus.UNPROCESSABLE_ENTITY);
     });
 
     it("should respond with status 409 when there is an user with given email", async () => {

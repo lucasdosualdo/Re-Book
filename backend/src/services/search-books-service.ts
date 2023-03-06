@@ -12,6 +12,8 @@ export async function searchBooks(searchTerm: string, startIndex: string) {
     const response = await getBooksByTitle(prunedTerm, startIndex);
 
     if (!response.data.totalItems) throw notFoundError();
+
+    //return response.data;
     const totalItems: number = response.data.totalItems;
 
     const formatedBooks = await formatBody(response.data);
@@ -25,7 +27,10 @@ export async function searchBooks(searchTerm: string, startIndex: string) {
   }
 }
 
-export async function searchBySubject(subject: SubjectParams, startIndex: string) {
+export async function searchBySubject(
+  subject: SubjectParams,
+  startIndex: string
+) {
   try {
     const response = await getBooksBySubject(subject, startIndex);
 
@@ -43,11 +48,11 @@ export async function searchBySubject(subject: SubjectParams, startIndex: string
 }
 
 async function formatBody(books) {
-  const booksWithDescription = books.items.filter(
-    (book) => book.volumeInfo.description
-  );
-
-  const booksBody = booksWithDescription.map((book) => {
+  // const booksWithDescription = books.items?.filter(
+  //   (book) => book.volumeInfo.description
+  // );
+  // if (!booksWithDescription) throw badRequestError();
+  const booksBody = books.items?.map((book) => {
     return {
       id: book.id,
       title: book.volumeInfo.title,
@@ -64,6 +69,7 @@ async function formatBody(books) {
       language: book.volumeInfo.language ? book.volumeInfo.language : null,
     };
   });
+  if (!booksBody) throw badRequestError();
   const newBooks: Promise<FormatBookParams>[] = await Promise.all(
     booksBody.map(replaceCover)
   );

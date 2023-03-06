@@ -20,6 +20,9 @@ export async function usersPost(req: Request, res: Response) {
     if (error.name === "DuplicatedDataError") {
       return res.status(httpStatus.CONFLICT).send(error);
     }
+    if (error.name === "IncorrectPasswordError") {
+      return res.status(httpStatus.UNPROCESSABLE_ENTITY).send(error);
+    }
     return res.status(httpStatus.BAD_REQUEST).send(error);
   }
 }
