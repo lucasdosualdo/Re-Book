@@ -20,7 +20,7 @@ export const BookBox = styled.div`
         0 6px 6px rgba(204, 204, 204, 0.2);
     }
   }
-  color: rgb(204, 204, 204);
+  color: var(--gray-color);
 
   > h3 {
     font-weight: 700;

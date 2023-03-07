@@ -1,6 +1,6 @@
-import { Container, Cover, Descriptions } from "./style";
+import { Container, Cover, Descriptions, BackIcon } from "./style";
 import { useLocation, useNavigate } from "react-router-dom";
-import { IoArrowBackCircleOutline } from "react-icons/io5";
+
 import { useParams } from "react-router-dom";
 import BookStatus from "../../components/BookStatus";
 import styled from "styled-components";
@@ -26,7 +26,6 @@ export default function Book() {
               Autor: <span>{book?.joinedAuthors}</span>
             </h3>
           )}
-
           <h3>
             Gênero: <span>Romance</span>
           </h3>
@@ -36,18 +35,3 @@ export default function Book() {
     </>
   );
 }
-
-const BackIcon = styled(IoArrowBackCircleOutline)`
-  cursor: pointer;
-  color: rgb(204, 204, 204);
-  font-size: 60px;
-  position: absolute;
-  top: 25px;
-  left: 25px;
-  :hover {
-    color: #ff006e;
-  }
-  @media (max-width: 650px) {
-    left: 10vw;
-  }
-`;

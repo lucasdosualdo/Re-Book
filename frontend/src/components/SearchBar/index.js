@@ -26,7 +26,7 @@ const SearchBox = styled.div`
   border-radius: 10px;
   margin-right: 5px;
   input {
-    background-color: rgb(204, 204, 204);
+    background-color: var(--gray-color);
     width: 100%;
     height: 100%;
     border: none;
@@ -38,5 +38,9 @@ const SearchBox = styled.div`
     &::placeholder {
       color: #898989;
     }
+  }
+
+  @media (max-width: 450px) {
+    width: 120px;
   }
 `;

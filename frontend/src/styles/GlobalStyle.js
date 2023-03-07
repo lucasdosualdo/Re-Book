@@ -61,6 +61,16 @@ table {
 html {
   font-size: 62.5%;
 }
+
+:root {
+--pink-color: #B20056;
+--blue-color: #002141;
+--mid-dark-blue-color: #05192b;
+--dark-blue-color: #021323;
+--gray-color: #D9D9D9;
+--white-color: #ffffff;
+}
+
 body {
   font-size: 1.6rem;
   font-family: 'Lato', sans-serif;
@@ -69,18 +79,19 @@ body {
 }
 li {
   list-style: none;
+
 }
-a {
+p {
   text-decoration: none;
-  color: rgb(204, 204, 204);
+  color: var(--gray-color);
+  cursor: pointer;
 }
 
 .nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   height: 8vh;
-  background: rgb(0, 33, 65);
+  background: var(--blue-color);
   padding: 0 20px;
   position: fixed;
   top: 0;
@@ -91,51 +102,34 @@ a {
 }
 .nav-brand {
   text-transform: uppercase;
+  margin-right: 80px;
 }
 
-/* .nav-menu {
+ .nav-menu {
   display: flex;
   align-items: center;
   justify-content: space-around;
   gap: 3rem;
-} */
-.nav-menu {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    gap: 3rem;
-    position: fixed;
-    top: 7vh;
-    right: 0;
-    height: 93vh;
-    width: 50vw;
-    background: rgb(0, 33, 65);
-    flex-direction: column;
-    transform: translateX(100%);
-    transition: 0.5s ease-in;
+} 
 
-  }
-
-
-/* .nav-toggler {
-  display: none;
-} */
 .nav-toggler {
-    display: block;
-    cursor: pointer;
-   
-  }
+  display: none;
+  cursor: pointer;
+} 
 
 .nav-toggler div {
   width: 2.5rem;
   height: 0.2rem;
   margin: 0.4rem;
-  background: rgb(204, 204, 204);
+  background: var(--gray-color);
   transition: 0.3s ease-in;
 
 }
 
-/* @media screen and (max-width: 768px) {
+ @media screen and (max-width: 768px) {
+  .nav {
+    justify-content: space-between;
+  }
   .nav-toggler {
     display: block;
     cursor: pointer;
@@ -146,12 +140,12 @@ a {
     right: 0;
     height: 93vh;
     width: 50vw;
-    background: rgb(0, 33, 65);
+    background: var(--blue-color);
     flex-direction: column;
     transform: translateX(100%);
     transition: 0.5s ease-in;
   }
-} */
+} 
 /* Active Class */
 .nav-active {
   transform: translateX(0%);

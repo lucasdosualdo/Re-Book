@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import { IoArrowBackCircleOutline } from "react-icons/io5";
 
 export const Container = styled.div`
   width: 100%;
-position: relative;
+  position: relative;
   display: flex;
   padding-left: 20vh;
   padding-top: 100px;
@@ -38,13 +39,13 @@ export const Cover = styled.div`
 `;
 export const Descriptions = styled.div`
   width: 50%;
-  color: rgb(204, 204, 204);
+  color: var(--gray-color);
   padding-left: 50px;
   h1 {
     font-weight: 700;
     font-size: 28px;
     margin-bottom: 40px;
-    color: #ff006e;
+    color: var(--pink-color);
   }
   p {
     font-size: 18px;
@@ -54,16 +55,31 @@ export const Descriptions = styled.div`
     font-size: 22px;
     font-weight: 700;
     margin-bottom: 20px;
-    color: #ff006e;
+    color: var(--pink-color);
   }
 
   span {
     font-weight: normal;
-    color: rgb(204, 204, 204);
+    color: var(--gray-color);
   }
 
   @media (max-width: 1050px) {
     width: 80vw;
     padding-left: 0;
+  }
+`;
+
+export const BackIcon = styled(IoArrowBackCircleOutline)`
+  cursor: pointer;
+  color: rgb(204, 204, 204);
+  font-size: 60px;
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  :hover {
+    color: #ff006e;
+  }
+  @media (max-width: 650px) {
+    left: 10vw;
   }
 `;

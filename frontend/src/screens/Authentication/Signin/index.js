@@ -5,10 +5,10 @@ import {
   TopContainer,
   Title,
   Branding,
-  LoginContainer,
+  AuthContainer,
   New,
-  Loginform,
-  Loginbutton,
+  Authform,
+  Authbutton,
 } from "../style";
 import rebook from "../../../assets/images/rebook-grey.svg";
 
@@ -23,8 +23,8 @@ export default function Signin() {
           <img src={rebook} alt="Re-Book" />
         </Branding>
       </TopContainer>
-      <LoginContainer>
-        <Loginform>
+      <AuthContainer>
+        <Authform>
           <input type="email" name="email" placeholder="e-mail" required />
           <input
             type="password"
@@ -32,12 +32,12 @@ export default function Signin() {
             placeholder="password"
             required
           />
-          <Loginbutton>{/* {load} */}</Loginbutton>
+          <Authbutton>Entrar</Authbutton>
           <Link to={`/signup`}>
-            <New>First time? Create an account!</New>
+            <New>Primeira vez? Clique aqui para criar uma conta!</New>
           </Link>
-        </Loginform>
-      </LoginContainer>
+        </Authform>
+      </AuthContainer>
     </Wrapper>
   );
 }

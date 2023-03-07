@@ -92,7 +92,7 @@ export default function Search() {
           />
 
           <IconContext.Provider
-            value={{ color: "#FF006E", className: "search-icon" }}
+            value={{ color: "var(--pink-color)", className: "search-icon" }}
           >
             <IoSearch id="search-icon" onClick={handlSearch} />
           </IconContext.Provider>

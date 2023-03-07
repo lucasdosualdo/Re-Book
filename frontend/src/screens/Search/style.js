@@ -23,7 +23,7 @@ export const Background = styled.div`
     display: flex;
     align-items: center;
     input {
-      background-color: rgb(204, 204, 204);
+      background-color: var(--gray-color);
       width: 100%;
       height: 100%;
       border: none;
@@ -48,14 +48,14 @@ export const Container = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  background-color: #021323;
+  background-color: var(--dark-blue-color);
   padding: 70px 0 0 20px;
 
   h1 {
     font-weight: 700;
     font-size: 28px;
     margin-bottom: 40px;
-    color: #ff006e;
+    color: var(--pink-color);
     margin: 20px 10px 0 10px;
   }
 `;
@@ -73,9 +73,10 @@ export const PageButton = styled.button`
   width: 40px;
   height: 40px;
   background-color: ${(props) =>
-    props.clicked ? "#ff006e" : "rgb(204, 204, 204)"};
+    props.clicked ? "var(--pink-color)" : "var(--gray-color)"};
   margin-right: 10px;
-  color: ${(props) => (props.clicked ? "rgb(204, 204, 204)" : "#ff006e")};
+  color: ${(props) =>
+    props.clicked ? "var(--gray-color)" : "var(--pink-color)"};
   cursor: ${(props) => (props.disabled ? "default" : "pointer")};
   opacity: ${(props) => (props.isLoading ? "0.5" : "1")};
   border-radius: 100%;

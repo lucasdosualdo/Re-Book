@@ -21,7 +21,7 @@ export const GenderBox = styled.div`
   :hover {
     width: 18%;
     font-size: 36px;
-    text-shadow: #b20056 1px 0 10px;
+    text-shadow: var(--pink-color) 1px 0 10px;
   }
   transition: all 0.5s ease;
   h3 {

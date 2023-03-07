@@ -23,11 +23,11 @@ export const TopContainer = styled.div`
 `;
 export const Title = styled.div`
   font-weight: 700;
-  font-size: 76px;
+  font-size: 90px;
   line-height: 84px;
   letter-spacing: 0.08em;
 
-  color: #ff006e;
+  color: var(--pink-color);
   font-family: "Anton", sans-serif;
   margin-bottom: 20px;
   p {
@@ -35,7 +35,7 @@ export const Title = styled.div`
     font-family: "Lato", sans-serif;
     letter-spacing: 0.01em;
     display: inline;
-    color: #ffffff;
+    color: var(--white-color);
   }
 
   @media (max-width: 614px) {
@@ -47,7 +47,7 @@ export const Branding = styled.div`
   font-family: "Oswald", sans-serif;
   font-weight: 700;
   font-size: 23px;
-  color: #ffffff;
+  color: var(--white-color);
   display: flex;
   justify-content: center;
 
@@ -61,14 +61,14 @@ export const Branding = styled.div`
     }
   }
 `;
-export const LoginContainer = styled.div`
+export const AuthContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   width: 100%;
   padding: 5vh 0;
-  background-color: #333333;
+  background-color: var(--mid-dark-blue-color);
   height: 70%;
   @media (min-width: 614px) {
     height: 100%;
@@ -87,9 +87,9 @@ export const New = styled.p`
   font-size: 17px;
   line-height: 25px;
   text-decoration-line: underline;
-  color: #ffffff;
+  color: var(--gray-color);
 `;
-export const Loginform = styled.form`
+export const Authform = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -98,30 +98,34 @@ export const Loginform = styled.form`
     width: 85%;
     height: 55px;
     margin-bottom: 6px;
-    border: solid 1px #d5d5d5;
+    border: solid 1px var(--gray-color);
     font-weight: 400;
     font-size: 20px;
     font-family: "Raleway", sans-serif;
     padding: 15px;
     border-radius: 6px;
     margin-bottom: 15px;
+    :focus {
+      outline: none;
+    }
     ::placeholder {
-      color: #9f9f9f;
+      color: #898989;
     }
   }
 `;
-export const Loginbutton = styled.button`
+export const Authbutton = styled.button`
   height: 55px;
   width: 85%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #1877f2;
+  background-color: var(--pink-color);
   border: none;
   border-radius: 6px;
   font-size: 21px;
   font-family: "Raleway", sans-serif;
-  color: #ffffff;
+  color: var(--white-color);
   margin-bottom: 25px;
   opacity: ${(props) => (props.bluur ? 0.5 : 1)};
+  cursor: pointer;
 `;

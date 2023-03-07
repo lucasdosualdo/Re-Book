@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
-import styled from "styled-components";
-import { IoSearch, IoClose } from "react-icons/io5";
+import { IoSearch, IoClose, IoCaretDown, IoCaretUp } from "react-icons/io5";
 import { IconContext } from "react-icons/lib";
 import SearchBar from "../components/SearchBar";
 import { CSSTransition } from "react-transition-group";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useBooks } from "../contexts/BooksContext";
 import { useIndexes } from "../contexts/IndexesContext";
+import romance from "../assets/images/romance.png";
+import { SearchContainer, Profile, LogOutArrow } from "./style";
 
 export default function Header() {
   const [active, setActive] = useState("nav-menu");
@@ -28,7 +29,7 @@ export default function Header() {
       document.body.style.paddingTop = "8vh";
     }
   }, [isSigninOrSignup]);
-  
+
   const navToggle = () => {
     if (active === "nav-menu") {
       setActive("nav-menu nav-active");
@@ -57,8 +58,7 @@ export default function Header() {
 
   return (
     <nav className={`nav ${isSigninOrSignup ? "no-header" : ""}`}>
-      <a
-        href="#"
+      <p
         className="nav-brand"
         onClick={() => {
           navigate("/");
@@ -68,37 +68,28 @@ export default function Header() {
         }}
       >
         Home
-      </a>
-      <a href="#" className="nav-brand" onClick={() => navigate("/search")}>
-        Search
-      </a>
+      </p>
+
       <ul className={active}>
         <li className="nav-item">
-          <a href="#" className="nav-link">
-            Hodwdwqdwqdwqme
-          </a>
+          <p className="nav-link" onClick={() => navigate("/search")}>
+            Pesquisar
+          </p>
         </li>
         <li className="nav-item">
-          <a href="#" className="nav-link">
-            About
-          </a>
+          <p className="nav-link">Meu perfil</p>
         </li>
         <li className="nav-item">
-          <a href="#" className="nav-link">
-            Portfolio
-          </a>
+          <p className="nav-link">Favoritos</p>
         </li>
         <li className="nav-item">
-          <a href="#" className="nav-link">
-            Skills
-          </a>
+          <p className="nav-link">Sobre</p>
         </li>
         <li className="nav-item">
-          <a href="#" className="nav-link">
-            Contact
-          </a>
+          <p className="nav-link">Sair</p>
         </li>
       </ul>
+
       <SearchContainer>
         <CSSTransition
           in={!disabled}
@@ -110,7 +101,7 @@ export default function Header() {
         </CSSTransition>
 
         <IconContext.Provider
-          value={{ color: "#cccccc", className: "search-icon" }}
+          value={{ color: "var(--gray-color)", className: "search-icon" }}
         >
           {disabled ? (
             <IoSearch onClick={() => setDisabled(!disabled)} />
@@ -120,6 +111,13 @@ export default function Header() {
         </IconContext.Provider>
       </SearchContainer>
 
+      <Profile>
+        <img src={romance} alt="profile" />
+        <LogOutArrow>
+          <IoCaretDown size={20} />
+        </LogOutArrow>
+      </Profile>
+
       <div onClick={navToggle} className={icon}>
         <div className="line1"></div>
         <div className="line2"></div>
@@ -128,11 +126,3 @@ export default function Header() {
     </nav>
   );
 }
-
-const SearchContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  right: 20vw;
-`;
