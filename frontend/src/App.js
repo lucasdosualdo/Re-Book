@@ -9,6 +9,7 @@ import { BooksProvider } from "./contexts/BooksContext";
 import { IndexesProvider } from "./contexts/IndexesContext";
 import Signin from "./screens/Authentication/Signin";
 import Signup from "./screens/Authentication/Signup";
+import { AuthProvider } from "./contexts/AuthContext";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -16,21 +17,23 @@ export default function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <BooksProvider>
-          <IndexesProvider>
-            <BrowserRouter>
-              <GlobalStyle />
-              <Header />
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/signin" element={<Signin />} />
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/search" element={<Search />} />
-                <Route path="/book/:bookId" element={<Book />} />
-              </Routes>
-            </BrowserRouter>
-          </IndexesProvider>
-        </BooksProvider>
+        <AuthProvider>
+          <BooksProvider>
+            <IndexesProvider>
+              <BrowserRouter>
+                <GlobalStyle />
+                <Header />
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/signin" element={<Signin />} />
+                  <Route path="/signup" element={<Signup />} />
+                  <Route path="/search" element={<Search />} />
+                  <Route path="/book/:bookId" element={<Book />} />
+                </Routes>
+              </BrowserRouter>
+            </IndexesProvider>
+          </BooksProvider>
+        </AuthProvider>
       </QueryClientProvider>
     </>
   );

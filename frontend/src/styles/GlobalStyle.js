@@ -64,6 +64,7 @@ html {
 
 :root {
 --pink-color: #B20056;
+--loading-pink-color: rgba(134, 74, 103);
 --blue-color: #002141;
 --mid-dark-blue-color: #05192b;
 --dark-blue-color: #021323;

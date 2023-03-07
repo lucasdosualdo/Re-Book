@@ -117,9 +117,10 @@ export const Authbutton = styled.button`
   height: 55px;
   width: 85%;
   display: flex;
-  align-items: center;
   justify-content: center;
-  background-color: var(--pink-color);
+  align-items: center;
+  background-color: ${(props) =>
+    props.isLoading ? "var(--loading-pink-color)" : "var(--pink-color)"};
   border: none;
   border-radius: 6px;
   font-size: 21px;
@@ -127,5 +128,5 @@ export const Authbutton = styled.button`
   color: var(--white-color);
   margin-bottom: 25px;
   opacity: ${(props) => (props.bluur ? 0.5 : 1)};
-  cursor: pointer;
+  cursor: ${(props) => (props.isLoading ? "default" : "pointer")};
 `;
