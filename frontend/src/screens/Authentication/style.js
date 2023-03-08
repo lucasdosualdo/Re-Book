@@ -130,3 +130,5 @@ export const Authbutton = styled.button`
   opacity: ${(props) => (props.bluur ? 0.5 : 1)};
   cursor: ${(props) => (props.isLoading ? "default" : "pointer")};
 `;
+
+

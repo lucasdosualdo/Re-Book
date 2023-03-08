@@ -15,6 +15,8 @@ import { postLogin } from "../../../services/signinApi";
 import { useAuth } from "../../../contexts/AuthContext";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useState } from "react";
+import { Slide, toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Signin() {
   const { user, setUser } = useAuth();
@@ -36,11 +38,18 @@ export default function Signin() {
         token: promise.data.token,
       });
       setLoading(false);
+      toast.success("Sucesso", {
+        progressStyle: {
+          backgroundColor: "var(--pink-color)",
+        },
+      });
     } catch (error) {
-      console.error(error);
+      toast.error("Erro", {
+        progressStyle: {
+          backgroundColor: "var(--pink-color)",
+        },
+      });
       setLoading(false);
-    } finally {
-      console.log(user);
     }
   }
 
@@ -83,6 +92,12 @@ export default function Signin() {
           </Link>
         </Authform>
       </AuthContainer>
+      <ToastContainer
+        transition={Slide}
+        autoClose={1500}
+        bodyClassName="toast-body"
+        icon={false}
+      />
     </Wrapper>
   );
 }

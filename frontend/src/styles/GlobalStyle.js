@@ -196,6 +196,12 @@ nav.no-header {
   display: none;
 }
 
+.toast-body {
+  background-color: var(--white-color);
+  color: var(--blue-color);
+  font-weight: 700;
+}
+
 `;
 
 export default GlobalStyle;

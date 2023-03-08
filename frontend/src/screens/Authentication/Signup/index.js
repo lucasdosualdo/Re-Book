@@ -15,6 +15,8 @@ import { postSignup } from "../../../services/signupApi";
 import { useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useAuth } from "../../../contexts/AuthContext";
+import { Slide, toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Signup() {
   const { user, setUser } = useAuth();
@@ -31,10 +33,18 @@ export default function Signup() {
     };
     try {
       const promise = await postSignup(body);
-      console.log(promise);
       setLoading(false);
+      toast.success("Sucesso", {
+        progressStyle: {
+          backgroundColor: "var(--pink-color)",
+        },
+      });
     } catch (error) {
-      console.error(error);
+      toast.error("Erro", {
+        progressStyle: {
+          backgroundColor: "var(--pink-color)",
+        },
+      });
       setLoading(false);
     }
   }
@@ -91,6 +101,12 @@ export default function Signup() {
           </Link>
         </Authform>
       </AuthContainer>
+      <ToastContainer
+        transition={Slide}
+        autoClose={1500}
+        bodyClassName="toast-body"
+        icon={false}
+      />
     </Wrapper>
   );
 }
