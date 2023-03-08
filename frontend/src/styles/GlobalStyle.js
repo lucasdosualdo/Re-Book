@@ -124,10 +124,9 @@ p {
   margin: 0.4rem;
   background: var(--gray-color);
   transition: 0.3s ease-in;
-
 }
 
- @media screen and (max-width: 768px) {
+ @media screen and (max-width: 950px) {
   .nav {
     justify-content: space-between;
   }
@@ -147,12 +146,10 @@ p {
     transition: 0.5s ease-in;
   }
 } 
-/* Active Class */
+
 .nav-active {
   transform: translateX(0%);
 }
-
-/* Toggle Icon Animation */
 
 .toggle .line1 {
   transform: rotate(-45deg) translate(-4px, 5px);
@@ -201,7 +198,6 @@ nav.no-header {
   color: var(--blue-color);
   font-weight: 700;
 }
-
 `;
 
 export default GlobalStyle;

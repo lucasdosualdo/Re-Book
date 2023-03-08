@@ -6,7 +6,7 @@ export const SearchContainer = styled.div`
   align-items: center;
   position: absolute;
   right: 15vw;
-  @media (max-width: 768px) {
+  @media (max-width: 950px) {
     right: 35vw;
   }
 `;
@@ -26,7 +26,7 @@ export const Profile = styled.div`
     object-fit: cover;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 950px) {
     right: 75px;
   }
 `;

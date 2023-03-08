@@ -40,11 +40,14 @@ export default function Signup() {
         },
       });
     } catch (error) {
-      toast.error("Erro", {
-        progressStyle: {
-          backgroundColor: "var(--pink-color)",
-        },
-      });
+      toast.error(
+        "Erro ao se cadastrar. Verifique as informações corretamente",
+        {
+          progressStyle: {
+            backgroundColor: "var(--pink-color)",
+          },
+        }
+      );
       setLoading(false);
     }
   }
@@ -63,7 +66,7 @@ export default function Signup() {
         <Authform onSubmit={handleSignup}>
           <input
             name="username"
-            placeholder="username"
+            placeholder="nome de usuário"
             disabled={loading}
             required
           />
@@ -77,14 +80,14 @@ export default function Signup() {
           <input
             type="password"
             name="password"
-            placeholder="password"
+            placeholder="senha (mín 10 caracteres)"
             disabled={loading}
             required
           />
           <input
             type="password"
             name="password"
-            placeholder="repeat password"
+            placeholder="repita a senha"
             disabled={loading}
             required
           />

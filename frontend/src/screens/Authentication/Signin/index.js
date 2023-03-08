@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { useNavigate, Link } from "react-router-dom";
 import {
   Wrapper,
@@ -19,8 +18,9 @@ import { Slide, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Signin() {
-  const { user, setUser } = useAuth();
+  const { login } = useAuth();
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   async function handleSignin(e) {
     e.preventDefault();
@@ -31,20 +31,23 @@ export default function Signin() {
     };
     try {
       const promise = await postLogin(body);
-      setUser({
+      const user = {
         username: promise.data.user.name,
         email: promise.data.user.email,
         id: promise.data.user.id,
         token: promise.data.token,
-      });
+      };
+      login(user);
+
       setLoading(false);
-      toast.success("Sucesso", {
+      toast.success(`Bem vindo, ${user.username}!`, {
         progressStyle: {
           backgroundColor: "var(--pink-color)",
         },
       });
+      navigate("/");
     } catch (error) {
-      toast.error("Erro", {
+      toast.error("Falha ao realizar o login.", {
         progressStyle: {
           backgroundColor: "var(--pink-color)",
         },
@@ -75,7 +78,7 @@ export default function Signin() {
           <input
             type="password"
             name="password"
-            placeholder="password"
+            placeholder="senha"
             disabled={loading}
             required
           />

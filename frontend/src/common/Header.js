@@ -8,6 +8,7 @@ import { useBooks } from "../contexts/BooksContext";
 import { useIndexes } from "../contexts/IndexesContext";
 import romance from "../assets/images/romance.png";
 import { SearchContainer, Profile, LogOutArrow } from "./style";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Header() {
   const [active, setActive] = useState("nav-menu");
@@ -17,7 +18,7 @@ export default function Header() {
   const { setBooks, setSearchTerm } = useBooks();
   const { setIndexes } = useIndexes();
   const { pathname } = useLocation();
-
+  const { user, token, logout } = useAuth();
   const isSigninOrSignup = pathname === "/signin" || pathname === "/signup";
 
   useEffect(() => {
@@ -85,9 +86,19 @@ export default function Header() {
         <li className="nav-item">
           <p className="nav-link">Sobre</p>
         </li>
-        <li className="nav-item">
-          <p className="nav-link">Sair</p>
-        </li>
+        {user && token && (
+          <li className="nav-item">
+            <p
+              className="nav-link"
+              onClick={() => {
+                logout();
+                navigate("/signin");
+              }}
+            >
+              Sair
+            </p>
+          </li>
+        )}
       </ul>
 
       <SearchContainer>
@@ -110,13 +121,11 @@ export default function Header() {
           )}
         </IconContext.Provider>
       </SearchContainer>
-
-      <Profile>
-        <img src={romance} alt="profile" />
-        <LogOutArrow>
-          <IoCaretDown size={20} />
-        </LogOutArrow>
-      </Profile>
+      {user && token && (
+        <Profile>
+          <img src={romance} alt="profile" />
+        </Profile>
+      )}
 
       <div onClick={navToggle} className={icon}>
         <div className="line1"></div>

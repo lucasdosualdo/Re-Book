@@ -40,7 +40,7 @@ const SearchBox = styled.div`
     }
   }
 
-  @media (max-width: 450px) {
+  @media (max-width: 500px) {
     width: 120px;
   }
 `;
