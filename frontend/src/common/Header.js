@@ -73,7 +73,14 @@ export default function Header() {
 
       <ul className={active}>
         <li className="nav-item">
-          <p className="nav-link" onClick={() => navigate("/search")}>
+          <p
+            className="nav-link"
+            onClick={() => {
+              navigate("/search");
+              setActive("nav-menu");
+              setIcon("nav-toggler");
+            }}
+          >
             Pesquisar
           </p>
         </li>
@@ -92,6 +99,8 @@ export default function Header() {
               className="nav-link"
               onClick={() => {
                 logout();
+                setActive("nav-menu");
+                setIcon("nav-toggler");
                 navigate("/signin");
               }}
             >

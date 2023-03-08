@@ -47,6 +47,7 @@ export const Background = styled.div`
 export const Container = styled.div`
   width: 100%;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   background-color: var(--dark-blue-color);
   padding: 70px 0 0 20px;
@@ -63,7 +64,8 @@ export const Container = styled.div`
 export const Pages = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin: 0 0 20px 20px;
+  margin: ${(props) =>
+    props.loading ? "200px 0 10px 20px" : "0 0 10px 20px"};
 `;
 
 export const PageButton = styled.button`
@@ -75,9 +77,10 @@ export const PageButton = styled.button`
   background-color: ${(props) =>
     props.clicked ? "var(--pink-color)" : "var(--gray-color)"};
   margin-right: 10px;
+  margin-bottom: 10px;
   color: ${(props) =>
     props.clicked ? "var(--gray-color)" : "var(--pink-color)"};
   cursor: ${(props) => (props.disabled ? "default" : "pointer")};
-  opacity: ${(props) => (props.isLoading ? "0.5" : "1")};
+  opacity: ${(props) => (props.loading ? "0.5" : "1")};
   border-radius: 100%;
 `;
