@@ -1,9 +1,16 @@
-import { Container, Cover, Descriptions, BackIcon } from "./style";
+import {
+  BookContainer,
+  Cover,
+  Descriptions,
+  BackIcon,
+  CommentsContainer,
+  Divider,
+  CommentBox,
+} from "./style";
 import { useLocation, useNavigate } from "react-router-dom";
-
 import { useParams } from "react-router-dom";
 import BookStatus from "../../components/BookStatus";
-import styled from "styled-components";
+import rebook from "../../assets/images/rebook-grey.svg";
 
 export default function Book() {
   const navigate = useNavigate();
@@ -13,7 +20,7 @@ export default function Book() {
 
   return (
     <>
-      <Container>
+      <BookContainer>
         <BackIcon onClick={() => navigate(-1)}></BackIcon>
         <Cover>
           <img src={book.cover} alt="narutin" />
@@ -23,15 +30,35 @@ export default function Book() {
           <p>{book.description}</p>
           {book.joinedAuthors && (
             <h3>
-              Autor: <span>{book?.joinedAuthors}</span>
+              Autor: <span>{book.joinedAuthors}</span>
             </h3>
           )}
-          <h3>
-            Gênero: <span>Romance</span>
-          </h3>
+          {book.pages && (
+            <h3>
+              Número de páginas: <span>{book.pages}</span>
+            </h3>
+          )}
+          {book.language && (
+            <h3>
+              Tradução: <span>{book.language}</span>
+            </h3>
+          )}
+
           <BookStatus />
         </Descriptions>
-      </Container>
+      </BookContainer>
+      <CommentsContainer>
+        <h1>Comentários</h1>
+        <p>O que achou do livro? Queremos ouvir sua opinião!</p>
+        <h6>Ordenar por:</h6>
+        <Divider></Divider>
+        <CommentBox>
+          <img src={rebook} alt="profile" />
+
+          <textarea></textarea>
+          <button>Enviar</button>
+        </CommentBox>
+      </CommentsContainer>
     </>
   );
 }

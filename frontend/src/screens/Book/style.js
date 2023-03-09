@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 
-export const Container = styled.div`
+export const BookContainer = styled.div`
   width: 100%;
   position: relative;
   display: flex;
@@ -71,15 +71,124 @@ export const Descriptions = styled.div`
 
 export const BackIcon = styled(IoArrowBackCircleOutline)`
   cursor: pointer;
-  color: rgb(204, 204, 204);
+  color: var(--gray-color);
   font-size: 60px;
   position: absolute;
   top: 25px;
   left: 25px;
   :hover {
-    color: #ff006e;
+    color: var(--pink-color);
   }
   @media (max-width: 650px) {
     left: 10vw;
+  }
+`;
+
+export const CommentsContainer = styled.div`
+  //background-color: red;
+  width: 90vw;
+  height: 500px;
+  padding-left: 20vh;
+  padding-top: 5vh;
+  position: relative;
+  h1 {
+    font-weight: 700;
+    margin-bottom: 15px;
+    font-size: 28px;
+    color: var(--white-color);
+  }
+  p {
+    font-size: 18px;
+  }
+  h6 {
+    font-size: 18px;
+    color: var(--white-color);
+    position: absolute;
+    right: 0;
+  }
+
+  @media (max-width: 1050px) {
+    padding-left: 10vw;
+  }
+
+  img {
+    width: 7vh;
+    height: 7vh;
+    border-radius: 100%;
+    object-fit: cover;
+    @media (max-width: 650px) {
+      width: 5vh;
+      height: 5vh;
+    }
+  }
+`;
+
+export const Divider = styled.div`
+  background-color: var(--gray-color);
+  width: 100%;
+  height: 2px;
+  margin: 25px 0;
+`;
+
+export const CommentBox = styled.div`
+  position: relative;
+  //background-color: green;
+  width: 100%;
+  display: flex;
+  height: auto;
+
+  textarea {
+    margin-left: 10px;
+    min-width: 70%;
+    max-width: 100%;
+    min-height: 80px;
+    max-height: 200px;
+    background-color: #151515;
+    font-size: 18px;
+    overflow-y: scroll;
+    padding: 10px;
+    border-radius: 5px;
+    word-wrap: break-word;
+    color: var(--gray-color);
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #333333;
+      border-radius: 5px;
+    }
+
+    @media (max-width: 650px) {
+      width: 100%;
+    }
+  }
+
+  button {
+    background-color: var(--gray-color);
+    height: 35px;
+    color: var(--pink-color);
+    font-size: 16px;
+
+    margin-top: auto;
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    :hover {
+      background-color: var(--pink-color);
+      color: var(--gray-color);
+      font-weight: 700;
+    }
+
+    @media (max-width: 650px) {
+      margin-top: 0;
+      position: absolute;
+      bottom: 0;
+      margin-left: 0;
+      height: 25px;
+
+      font-size: 12px;
+    }
   }
 `;
