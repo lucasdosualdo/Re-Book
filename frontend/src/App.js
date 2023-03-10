@@ -3,6 +3,7 @@ import Header from "./common/Header";
 import Home from "./screens/Home";
 import Search from "./screens/Search";
 import Book from "./screens/Book";
+import Profile from "./screens/Profile";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { BooksProvider } from "./contexts/BooksContext";
@@ -29,6 +30,7 @@ export default function App() {
                   <Route path="/signup" element={<Signup />} />
                   <Route path="/search" element={<Search />} />
                   <Route path="/book/:bookId" element={<Book />} />
+                  <Route path="/profile" element={<Profile />} />
                 </Routes>
               </BrowserRouter>
             </IndexesProvider>

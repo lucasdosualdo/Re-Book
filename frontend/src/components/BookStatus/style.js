@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Options = styled.div`
   display: flex;
-  margin-top: 70px;
+  //margin-top: 70px;
 `;
 
 export const Option = styled.div`

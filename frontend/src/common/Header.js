@@ -85,7 +85,9 @@ export default function Header() {
           </p>
         </li>
         <li className="nav-item">
-          <p className="nav-link">Meu perfil</p>
+          <p className="nav-link" onClick={() => navigate("/profile")}>
+            Meu perfil
+          </p>
         </li>
         <li className="nav-item">
           <p className="nav-link">Favoritos</p>

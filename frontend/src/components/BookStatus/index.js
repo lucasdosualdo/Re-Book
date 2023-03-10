@@ -1,8 +1,5 @@
-import { Bottom, Options, Option } from "./style";
-import { IoChevronDown } from "react-icons/io5";
-import { IconContext } from "react-icons/lib";
+import { Options, Option } from "./style";
 import { useState } from "react";
-import { CSSTransition } from "react-transition-group";
 
 export default function BookStatus() {
   const [selectedId, setSelectedId] = useState(-1);
