@@ -7,6 +7,7 @@ export default function EachBook({ key, book }) {
   book.cover = changeCover(book.cover);
   const joinedAuthors = joinAuthors(book?.authors);
   const bookId = book.id;
+
   return (
     <>
       <BookBox

@@ -5,7 +5,7 @@ export const BookContainer = styled.div`
   width: 100%;
   position: relative;
   display: flex;
-  padding-left: 20vh;
+  padding-left: 10vw;
   padding-top: 100px;
   @media (max-width: 1050px) {
     padding-left: 0;
@@ -88,7 +88,7 @@ export const CommentsContainer = styled.div`
   //background-color: red;
   width: 90vw;
   height: 500px;
-  padding-left: 20vh;
+  padding-left: 10vw;
   padding-top: 5vh;
   position: relative;
   h1 {
@@ -105,21 +105,6 @@ export const CommentsContainer = styled.div`
     color: var(--white-color);
     position: absolute;
     right: 0;
-  }
-
-  @media (max-width: 1050px) {
-    padding-left: 10vw;
-  }
-
-  img {
-    width: 7vh;
-    height: 7vh;
-    border-radius: 100%;
-    object-fit: cover;
-    @media (max-width: 650px) {
-      width: 5vh;
-      height: 5vh;
-    }
   }
 `;
 
@@ -188,6 +173,79 @@ export const CommentBox = styled.div`
       margin-left: 0;
       height: 25px;
 
+      font-size: 12px;
+    }
+  }
+
+  .like-icon {
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+  }
+`;
+
+export const ProfileImage = styled.img`
+  width: 5vw;
+  height: 5vw;
+  border-radius: 100%;
+  object-fit: cover;
+  @media (max-width: 1050px) {
+    width: 7vw;
+    height: 7vw;
+  }
+
+  @media (max-width: 650px) {
+    width: 10vw;
+    height: 10vw;
+  }
+`;
+
+export const Comment = styled.div`
+  //background-color: red;
+  width: 100%;
+  height: auto;
+  padding: 0 10px 10px 10px;
+  color: var(--gray-color);
+  position: relative;
+  p {
+    word-wrap: break-word;
+
+    @media (max-width: 650px) {
+      font-size: 14px;
+    }
+  }
+  @media (max-width: 650px) {
+    width: 90%;
+  }
+
+  h3 {
+    color: var(--pink-color);
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 5px;
+  }
+
+  h5 {
+    color: var(--gray-color);
+    font-size: 14px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    @media (max-width: 650px) {
+      font-size: 12px;
+    }
+  }
+`;
+
+export const LikeBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  h3 {
+    color: var(--gray-color);
+    font-size: 14px;
+    @media (max-width: 650px) {
       font-size: 12px;
     }
   }
