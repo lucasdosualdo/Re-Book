@@ -2,13 +2,16 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   padding-left: 10vw;
-  background-color: green;
   width: 100%;
 
   h1 {
     font-weight: 700;
     font-size: 28px;
     color: var(--pink-color);
+  }
+
+  > h1 {
+    margin: 40px 0;
   }
   @media (max-width: 650px) {
     padding: 0 5vw;
@@ -17,9 +20,8 @@ export const Container = styled.div`
 
 export const Book = styled.div`
   width: 100%;
-  background-color: red;
-  padding-bottom: 250px;
-  // position: relative;
+  margin-bottom: 50px;
+
 `;
 
 export const InfoWrapper = styled.div`
@@ -57,7 +59,6 @@ export const Cover = styled.div`
 export const Info = styled.div`
   width: 70%;
   padding-left: 30px;
-  background-color: blue;
 
   @media (max-width: 650px) {
     width: 100%;
@@ -85,53 +86,5 @@ export const Info = styled.div`
     font-size: 18px;
     word-wrap: break-word;
     margin-bottom: 15px;
-  }
-`;
-
-export const ReviewContainer = styled.div`
-  //position: absolute;
-  //bottom: 0;
-  //left: 0;
-  background-color: yellow;
-  
-  //height: 250px;
-  color: var(--gray-color);
-  display: flex;
-  flex-direction: column;
- 
-`;
-
-export const Text = styled.div`
-  display: flex;
-  flex-direction: column;
-  textarea {
-    min-width: 300px;
-    max-width: 500px;
-    min-height: 80px;
-    max-height: 200px;
-    background-color: #151515;
-    font-size: 18px;
-    overflow-y: scroll;
-    padding: 10px;
-    border-radius: 5px;
-    word-wrap: break-word;
-    color: var(--gray-color);
-    ::-webkit-scrollbar {
-      width: 5px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background-color: #333333;
-      border-radius: 5px;
-    }
-  }
-
-  div {
-    background-color: purple;
-    color: var(--gray-color);
-    width: 90%;
-    @media (max-width: 650px) {
-    width: 100%;
-  }
   }
 `;
