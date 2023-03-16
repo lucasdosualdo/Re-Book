@@ -6,6 +6,7 @@ import {
   usersRouter,
   searchBooksRouter,
   subjectsRouter,
+  profileRouter,
 } from "./routers";
 import { handleApplicationErrors } from "./middlewares/error-handling-middleware";
 
@@ -23,6 +24,7 @@ app
   .use("/auth", authenticationRouter)
   .use("/search", searchBooksRouter)
   .use("/subjects", subjectsRouter)
+  .use("/profile", profileRouter)
   .use(handleApplicationErrors);
 
 app.listen(process.env.PORT, () => {

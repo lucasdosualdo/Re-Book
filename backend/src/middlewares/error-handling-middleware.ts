@@ -28,7 +28,7 @@ export function handleApplicationErrors(
     });
   }
 
-  if (err.name === "IncorrectPasswordError") {
+  if (err.name === "IncorrectPasswordError" || err.name === "CannotFoundProfile") {
     return res.status(httpStatus.UNPROCESSABLE_ENTITY).send({
       message: err.message,
     });
@@ -40,6 +40,12 @@ export function handleApplicationErrors(
     err.name === "CannotEnrollBeforeStartDateError"
   ) {
     return res.status(httpStatus.BAD_REQUEST).send({
+      message: err.message,
+    });
+  }
+
+  if (err.name === "FailedToGetBookFromApi") {
+    return res.status(httpStatus.SERVICE_UNAVAILABLE).send({
       message: err.message,
     });
   }

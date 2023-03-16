@@ -37,3 +37,18 @@ export async function getSubject(req: Request, res: Response) {
     return res.status(httpStatus.BAD_REQUEST).send(error);
   }
 }
+
+export async function getSearchedBook(req: Request, res: Response) {
+  const { bookId } = req.params as { bookId: string };
+  if (!bookId) return res.sendStatus(httpStatus.BAD_REQUEST);
+  try {
+    const book = await searchBooksService.searchByBookId(bookId);
+
+    return res.status(httpStatus.OK).send(book);
+  } catch (error) {
+    if (error.name === "FailedToGetBookFromApi") {
+      return res.status(httpStatus.SERVICE_UNAVAILABLE).send(error);
+    }
+    return res.status(httpStatus.BAD_REQUEST).send(error);
+  }
+}

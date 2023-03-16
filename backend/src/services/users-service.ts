@@ -4,7 +4,8 @@ import userRepository from "../repositories/user-repository";
 import { CreateUserParams } from "../protocols";
 import { v4 as uuid } from "uuid";
 import bcrypt from "bcrypt";
-import { users } from "@prisma/client";
+import { profile, users } from "@prisma/client";
+import profileRepository from "../repositories/profile-repository";
 
 export async function createUser({
   name,
@@ -19,11 +20,14 @@ export async function createUser({
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  return userRepository.create({
+  const user: users = await userRepository.create({
     name,
     email,
     password: hashedPassword,
   });
+
+  await profileRepository.createProfile(user.id);
+  return user;
 }
 
 async function checkPasswordExists(password: string) {

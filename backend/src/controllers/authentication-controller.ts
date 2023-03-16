@@ -15,6 +15,9 @@ export async function singInPost(req: Request, res: Response) {
     if (error.name === "CannotCreateSessionError") {
       return res.sendStatus(httpStatus.BAD_REQUEST);
     }
+    if (error.name === "CannotFoundProfile") {
+      return res.sendStatus(httpStatus.UNPROCESSABLE_ENTITY);
+    }
     return res.sendStatus(httpStatus.UNAUTHORIZED);
   }
 }

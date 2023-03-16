@@ -59,11 +59,13 @@ model libraries {
 
 model profile {
   id        Int      @id @default(autoincrement())
-  userId    Int
-  picture   String?
+  userId    Int      @unique
+  picture   Bytes?
   createdAt DateTime @default(now()) @db.Timestamp(6)
   updatedAt DateTime @default(now()) @db.Timestamp(6)
   users     users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("profile")
 }
 
 model sessions {
@@ -85,6 +87,6 @@ model users {
   updatedAt DateTime    @default(now()) @db.Timestamp(6)
   comments  comments[]
   libraries libraries[]
-  profile   profile[]
+  profile   profile?
   sessions  sessions[]
 }

@@ -61,7 +61,7 @@ CREATE TABLE "libraries" (
 CREATE TABLE "profile" (
     "id" SERIAL NOT NULL,
     "userId" INTEGER NOT NULL,
-    "picture" TEXT,
+    "picture" BYTEA,
     "createdAt" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -85,7 +85,7 @@ CREATE TABLE "users" (
     "id" SERIAL NOT NULL,
     "name" VARCHAR(25) NOT NULL,
     "email" VARCHAR(50) NOT NULL,
-    "password" VARCHAR(30) NOT NULL,
+    "password" TEXT NOT NULL,
     "createdAt" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -93,7 +93,7 @@ CREATE TABLE "users" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "sessions_token_key" ON "sessions"("token");
+CREATE UNIQUE INDEX "profile_userId_key" ON "profile"("userId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
