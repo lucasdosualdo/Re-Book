@@ -12,7 +12,7 @@ export default function BookStatus() {
     }
   }
 
-  const options = ["Pretendo ler", "Estou lendo", "Lido"];
+  const options = ["Estou lendo", "Lido"];
 
   return (
     <Options>

@@ -31,14 +31,15 @@ export default function Signin() {
     };
     try {
       const promise = await postLogin(body);
+
       const user = {
         username: promise.data.user.name,
         email: promise.data.user.email,
         id: promise.data.user.id,
         token: promise.data.token,
+        // profilePicture: promise.data.profile,
       };
       login(user);
-
       setLoading(false);
       toast.success(`Bem vindo, ${user.username}!`, {
         progressStyle: {
@@ -47,6 +48,7 @@ export default function Signin() {
       });
       navigate("/");
     } catch (error) {
+      console.log(error.message);
       toast.error("Falha ao realizar o login.", {
         progressStyle: {
           backgroundColor: "var(--pink-color)",
@@ -59,11 +61,11 @@ export default function Signin() {
   return (
     <Wrapper>
       <TopContainer>
-        <Title>
+        <Title onClick={() => navigate("/")}>
           Re<p>-Book</p>
         </Title>
         <Branding>
-          <img src={rebook} alt="Re-Book" />
+          <img src={rebook} alt="Re-Book" onClick={() => navigate("/")} />
         </Branding>
       </TopContainer>
       <AuthContainer>

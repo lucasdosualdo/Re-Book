@@ -38,6 +38,9 @@ export const Text = styled.div`
     :hover {
       color: var(--pink-color);
     }
+    @media (max-width: 650px) {
+      margin-top: 10px;
+    }
   }
   @media (max-width: 650px) {
     flex-direction: column;
@@ -90,6 +93,7 @@ export const SaveButton = styled.button`
   color: var(--pink-color) !important;
   border-radius: 5px;
   padding: 5px 10px;
+  font-weight: 600;
   :hover {
     color: var(--gray-color) !important;
     background: var(--pink-color) !important;

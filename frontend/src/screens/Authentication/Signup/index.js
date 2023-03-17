@@ -21,6 +21,7 @@ import "react-toastify/dist/ReactToastify.css";
 export default function Signup() {
   const { user, setUser } = useAuth();
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   async function handleSignup(e) {
     e.preventDefault();
@@ -55,11 +56,11 @@ export default function Signup() {
   return (
     <Wrapper>
       <TopContainer>
-        <Title>
+        <Title onClick={() => navigate("/")}>
           Re<p>-Book</p>
         </Title>
         <Branding>
-          <img src={rebook} alt="Re-Book" />
+          <img src={rebook} alt="Re-Book" onClick={() => navigate("/")} />
         </Branding>
       </TopContainer>
       <AuthContainer>

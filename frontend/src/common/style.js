@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { IoClose } from "react-icons/io5";
 
 export const SearchContainer = styled.div`
   display: flex;
@@ -36,3 +37,4 @@ export const LogOutArrow = styled.span`
     display: none;
   }
 `;
+

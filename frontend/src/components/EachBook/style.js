@@ -18,6 +18,7 @@ export const BookBox = styled.div`
       border-radius: 10px;
       box-shadow: 0 10px 20px rgba(204, 204, 204, 0.2),
         0 6px 6px rgba(204, 204, 204, 0.2);
+        cursor: pointer;
     }
   }
   color: var(--gray-color);
@@ -29,6 +30,7 @@ export const BookBox = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    cursor: pointer;
   }
   > h5 {
     font-size: 13px;

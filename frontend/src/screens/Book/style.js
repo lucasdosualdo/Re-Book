@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
+import { IoHeart } from "react-icons/io5";
 
 export const BookContainer = styled.div`
   width: 100%;
@@ -20,7 +21,7 @@ export const Cover = styled.div`
   padding-top: calc(1.45);
   box-shadow: 0 10px 20px rgba(204, 204, 204, 0.2),
     0 6px 6px rgba(204, 204, 204, 0.2);
-
+  position: relative;
   > img {
     width: 100%;
     height: 100%;
@@ -85,7 +86,6 @@ export const BackIcon = styled(IoArrowBackCircleOutline)`
 `;
 
 export const CommentsContainer = styled.div`
-  //background-color: red;
   width: 90vw;
   height: 500px;
   padding-left: 10vw;
@@ -99,12 +99,17 @@ export const CommentsContainer = styled.div`
   }
   p {
     font-size: 18px;
+    cursor: default;
   }
   h6 {
+    font-weight: 700;
+    margin-top: 15px;
     font-size: 18px;
     color: var(--white-color);
-    position: absolute;
-    right: 0;
+    cursor: pointer;
+    :hover {
+      color: var(--pink-color);
+    }
   }
 `;
 
@@ -117,7 +122,6 @@ export const Divider = styled.div`
 
 export const CommentBox = styled.div`
   position: relative;
-  //background-color: green;
   width: 100%;
   display: flex;
   height: auto;
@@ -249,4 +253,15 @@ export const LikeBox = styled.div`
       font-size: 12px;
     }
   }
+`;
+
+export const LikeBookButton = styled(IoHeart)`
+  opacity: ${(props) => (props.likedBook ? "1" : "0.6")};
+  color: ${(props) =>
+    props.likedBook ? "var(--pink-color)" : "var(--white-color)"};
+  font-size: 50px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
 `;

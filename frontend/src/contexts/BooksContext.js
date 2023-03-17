@@ -4,6 +4,7 @@ const BooksContext = createContext();
 
 export function BooksProvider({ children }) {
   const [books, setBooks] = useState(null);
+  const [singleBook, setSingleBook] = useState(null);
   const [searchTerm, setSearchTerm] = useState(null);
   const [isSubject, setIsSubject] = useState(false);
   return (
@@ -11,6 +12,8 @@ export function BooksProvider({ children }) {
       value={{
         books,
         setBooks,
+        singleBook,
+        setSingleBook,
         searchTerm,
         setSearchTerm,
         isSubject,

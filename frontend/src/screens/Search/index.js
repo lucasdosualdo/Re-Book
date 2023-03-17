@@ -9,9 +9,9 @@ import {
 import EachBook from "../../components/EachBook";
 import { useBooks } from "../../contexts/BooksContext";
 import { useIndexes } from "../../contexts/IndexesContext";
-import ClipLoader from "react-spinners/ClipLoader";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import LoadingContent from "../../children/LoadingContent";
 
 export default function Search() {
   const { state } = useLocation();
@@ -57,6 +57,7 @@ export default function Search() {
         );
         setPageNumber(1);
       } catch (error) {
+        console.error(error.message);
         setError("Não foi possível encontrar livros pelo título procurado.");
       } finally {
         setLoading(false);
@@ -88,26 +89,6 @@ export default function Search() {
     }
   }
 
-  function ShowBooks() {
-    if (error) {
-      return <h1>{error}</h1>;
-    }
-    if (loading) {
-      return (
-        <ClipLoader
-          color={"var(--pink-color)"}
-          loading={loading}
-          speedMultiplier={0.7}
-          size={100}
-        />
-      );
-    }
-
-    return books?.items.map((book, index) => (
-      <EachBook key={index} book={book} />
-    ));
-  }
-
   return (
     <>
       <Background>
@@ -127,7 +108,11 @@ export default function Search() {
         </div>
       </Background>
       <Container>
-        <ShowBooks />
+        <LoadingContent error={error} loading={loading} content={books}>
+          {books?.items.map((book, index) => (
+            <EachBook key={index} book={book} />
+          ))}
+        </LoadingContent>
       </Container>
       <Pages loading={loading}>
         {indexes?.length > 1 &&

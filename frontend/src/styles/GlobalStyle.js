@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { UploadImage } from "../components/ProfileModal/style";
 
 const GlobalStyle = createGlobalStyle`
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -197,6 +198,40 @@ nav.no-header {
   background-color: var(--white-color);
   color: var(--blue-color);
   font-weight: 700;
+}
+
+.modal-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content{
+ background-color: rgba(19, 17, 22, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; 
+ z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  input {
+    display: none;
+  }
+  img{
+     width: 25vh;
+    height: 25vh;
+    border-radius: 100%;
+    object-fit: cover;
+    :hover {
+    
+      ~ ${UploadImage} {
+        z-index: 1;
+      } 
+    }
+  }
 }
 `;
 

@@ -26,7 +26,7 @@ export const Title = styled.div`
   font-size: 90px;
   line-height: 84px;
   letter-spacing: 0.08em;
-
+  cursor: pointer;
   color: var(--pink-color);
   font-family: "Anton", sans-serif;
   margin-bottom: 20px;
@@ -52,6 +52,7 @@ export const Branding = styled.div`
   justify-content: center;
 
   img {
+    cursor: pointer;
     width: 60%;
   }
   @media (max-width: 614px) {
@@ -130,5 +131,3 @@ export const Authbutton = styled.button`
   opacity: ${(props) => (props.bluur ? 0.5 : 1)};
   cursor: ${(props) => (props.isLoading ? "default" : "pointer")};
 `;
-
-

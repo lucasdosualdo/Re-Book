@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { IoSearch, IoClose, IoCaretDown, IoCaretUp } from "react-icons/io5";
+import { IoSearch, IoClose } from "react-icons/io5";
 import { IconContext } from "react-icons/lib";
 import SearchBar from "../components/SearchBar";
 import { CSSTransition } from "react-transition-group";
@@ -7,8 +7,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useBooks } from "../contexts/BooksContext";
 import { useIndexes } from "../contexts/IndexesContext";
 import romance from "../assets/images/romance.png";
-import { SearchContainer, Profile, LogOutArrow } from "./style";
+import { SearchContainer, Profile } from "./style";
 import { useAuth } from "../contexts/AuthContext";
+import ProfileModal from "../components/ProfileModal";
 
 export default function Header() {
   const [active, setActive] = useState("nav-menu");
@@ -20,6 +21,7 @@ export default function Header() {
   const { pathname } = useLocation();
   const { user, token, logout } = useAuth();
   const isSigninOrSignup = pathname === "/signin" || pathname === "/signup";
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   useEffect(() => {
     if (isSigninOrSignup) {
@@ -57,15 +59,19 @@ export default function Header() {
     };
   }, []);
 
+  function handleCleanSearch() {
+    setBooks(null);
+    setSearchTerm(null);
+    setIndexes(null);
+  }
+
   return (
     <nav className={`nav ${isSigninOrSignup ? "no-header" : ""}`}>
       <p
         className="nav-brand"
         onClick={() => {
+          handleCleanSearch();
           navigate("/");
-          setBooks(null);
-          setSearchTerm(null);
-          setIndexes(null);
         }}
       >
         Home
@@ -76,26 +82,34 @@ export default function Header() {
           <p
             className="nav-link"
             onClick={() => {
-              navigate("/search");
               setActive("nav-menu");
               setIcon("nav-toggler");
+              handleCleanSearch();
+              navigate("/search");
             }}
           >
             Pesquisar
           </p>
         </li>
-        <li className="nav-item">
-          <p className="nav-link" onClick={() => navigate("/profile")}>
-            Meu perfil
-          </p>
-        </li>
-        <li className="nav-item">
-          <p className="nav-link">Favoritos</p>
-        </li>
+        {user && token && (
+          <li className="nav-item">
+            <p
+              className="nav-link"
+              onClick={() => {
+                setActive("nav-menu");
+                setIcon("nav-toggler");
+                navigate("/profile");
+              }}
+            >
+              Meus livros
+            </p>
+          </li>
+        )}
+
         <li className="nav-item">
           <p className="nav-link">Sobre</p>
         </li>
-        {user && token && (
+        {user && token ? (
           <li className="nav-item">
             <p
               className="nav-link"
@@ -107,6 +121,19 @@ export default function Header() {
               }}
             >
               Sair
+            </p>
+          </li>
+        ) : (
+          <li className="nav-item">
+            <p
+              className="nav-link"
+              onClick={() => {
+                setActive("nav-menu");
+                setIcon("nav-toggler");
+                navigate("/signin");
+              }}
+            >
+              Login
             </p>
           </li>
         )}
@@ -133,7 +160,7 @@ export default function Header() {
         </IconContext.Provider>
       </SearchContainer>
       {user && token && (
-        <Profile>
+        <Profile onClick={() => setIsOpenModal(true)}>
           <img src={romance} alt="profile" />
         </Profile>
       )}
@@ -143,6 +170,7 @@ export default function Header() {
         <div className="line2"></div>
         <div className="line3"></div>
       </div>
+      <ProfileModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
     </nav>
   );
 }
