@@ -3,7 +3,11 @@ import supertest from "supertest";
 import httpStatus from "http-status";
 import { faker } from "@faker-js/faker";
 import { cleanDb, generateValidToken } from "./helpers";
-import { generateValidSignInBody, createUser } from "../factories/users-factory";
+import {
+  generateValidSignInBody,
+  createUser,
+  createProfile,
+} from "../factories/users-factory";
 
 beforeAll(async () => {
   await cleanDb();
@@ -51,8 +55,8 @@ describe("POST /auth/sign-in", () => {
     describe("when credentials are valid", () => {
       it("should respond with status 200", async () => {
         const body = generateValidSignInBody();
-        await createUser(body);
-
+        const user = await createUser(body);
+        await createProfile(user.id);
         const response = await server.post("/auth/sign-in").send(body);
 
         expect(response.status).toBe(httpStatus.OK);
@@ -61,7 +65,7 @@ describe("POST /auth/sign-in", () => {
       it("should respond with user data", async () => {
         const body = generateValidSignInBody();
         const user = await createUser(body);
-
+        await createProfile(user.id);
         const response = await server.post("/auth/sign-in").send(body);
         const bodyResponse = {
           id: response.body.user.id,
@@ -76,7 +80,8 @@ describe("POST /auth/sign-in", () => {
 
       it("should respond with session token", async () => {
         const body = generateValidSignInBody();
-        await createUser(body);
+        const user = await createUser(body);
+        await createProfile(user.id);
         const response = await server.post("/auth/sign-in").send(body);
 
         expect(response.body.token).toBeDefined();

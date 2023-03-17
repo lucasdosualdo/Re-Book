@@ -8,44 +8,39 @@ datasource db {
 }
 
 model bookStatus {
-  id             Int              @id @default(autoincrement())
-  status         String
-  createdAt      DateTime         @default(now()) @db.Timestamp(6)
-  updatedAt      DateTime         @default(now()) @db.Timestamp(6)
-  booksLibraries booksLibraries[]
+  id        Int         @id @default(autoincrement())
+  status    String
+  createdAt DateTime    @default(now()) @db.Timestamp(6)
+  updatedAt DateTime    @default(now()) @db.Timestamp(6)
+  userBooks userBooks[]
 }
 
 model books {
-  id             String           @id
-  title          String
-  author         String?
-  gender         String?
-  description    String?
-  cover          String?
-  rating         Int
-  createdAt      DateTime         @default(now()) @db.Timestamp(6)
-  updatedAt      DateTime         @default(now()) @db.Timestamp(6)
-  booksLibraries booksLibraries[]
-}
-
-model booksLibraries {
-  id             Int        @id @default(autoincrement())
-  libraryId      Int
-  bookId         String
-  bookStatusId   Int
-  personalRating Int
-  createdAt      DateTime   @default(now()) @db.Timestamp(6)
-  updatedAt      DateTime   @default(now()) @db.Timestamp(6)
-  books          books      @relation(fields: [bookId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  bookStatus     bookStatus @relation(fields: [bookStatusId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id            String      @id
+  title         String
+  author        String?
+  category      String?
+  description   String?
+  cover         String?
+  rating        Int?
+  pages         Int?
+  language      String?
+  publishedDate String?
+  createdAt     DateTime    @default(now()) @db.Timestamp(6)
+  updatedAt     DateTime    @default(now()) @db.Timestamp(6)
+  comments      comments[]
+  ratings       ratings[]
+  userBooks     userBooks[]
 }
 
 model comments {
   id        Int      @id @default(autoincrement())
   comment   String
   userId    Int
+  bookId    String
   createdAt DateTime @default(now()) @db.Timestamp(6)
   updatedAt DateTime @default(now()) @db.Timestamp(6)
+  books     books    @relation(fields: [bookId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   users     users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
@@ -60,7 +55,7 @@ model libraries {
 model profile {
   id        Int      @id @default(autoincrement())
   userId    Int      @unique
-  picture   Bytes?
+  picture   String?
   createdAt DateTime @default(now()) @db.Timestamp(6)
   updatedAt DateTime @default(now()) @db.Timestamp(6)
   users     users    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
@@ -88,5 +83,34 @@ model users {
   comments  comments[]
   libraries libraries[]
   profile   profile?
+  ratings   ratings[]
   sessions  sessions[]
+  userBooks userBooks[]
+}
+
+model ratings {
+  id        Int         @id @default(autoincrement())
+  userId    Int
+  bookId    String
+  rating    Int
+  createdAt DateTime    @default(now()) @db.Timestamp(6)
+  updatedAt DateTime    @default(now()) @db.Timestamp(6)
+  books     books       @relation(fields: [bookId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users     users       @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  userBooks userBooks[]
+}
+
+model userBooks {
+  id           Int        @id @default(autoincrement())
+  review       String?
+  userId       Int
+  bookId       String
+  bookStatusId Int
+  ratingId     Int?
+  createdAt    DateTime   @default(now()) @db.Timestamp(6)
+  updatedAt    DateTime   @default(now()) @db.Timestamp(6)
+  books        books      @relation(fields: [bookId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  bookStatus   bookStatus @relation(fields: [bookStatusId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  ratings      ratings?   @relation(fields: [ratingId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users        users      @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }

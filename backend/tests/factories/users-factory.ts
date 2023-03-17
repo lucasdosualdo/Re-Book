@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 import prisma from "../../src/config/database";
-import { users } from "@prisma/client";
+import { users, profile } from "@prisma/client";
 import bcrypt from "bcrypt";
 
 export function generateValidSignInBody() {
@@ -29,6 +29,14 @@ export async function createUser(params: Partial<users> = {}): Promise<users> {
       name: faker.lorem.word(10),
       email: params.email || faker.internet.email(),
       password: hashedPassword,
+    },
+  });
+}
+
+export async function createProfile(userId: number): Promise<profile> {
+  return prisma.profile.create({
+    data: {
+      userId,
     },
   });
 }

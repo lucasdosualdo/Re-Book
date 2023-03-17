@@ -1,5 +1,4 @@
 import axios from "axios";
-import { failedToGetBookFromApi } from "../errors/failed-to-get-book-from-api-error";
 import { SubjectParams } from "../protocols";
 
 const API_KEY = process.env.GOOGLE_API_KEY;
